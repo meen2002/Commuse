@@ -3,7 +3,11 @@ import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import BlueCircleMarker from "./Todo.js"; // マーカーをインポート
 
-const MapComponent = ({ marker, setMarker }) => {
+const MapComponent =() => {
+  const [marker,setMarker]=useState({
+    lat:35.658584,
+    lng:139.745433,
+  })
   const [mylatlon, setMylatlon] = useState(marker);
   const [error, setError] = useState(null);
   const [myaccuracy, setMyaccuracy] = useState(null);
@@ -52,7 +56,7 @@ const MapComponent = ({ marker, setMarker }) => {
     <>
       {error && <p>Error: {error}</p>}
       <LoadScript googleMapsApiKey="AIzaSyCotC5VerJNRwfjL2CIfLBN9O2SpbVoLe4">
-        
+
         <GoogleMap
           center={mylatlon}
           zoom={18}
@@ -60,7 +64,7 @@ const MapComponent = ({ marker, setMarker }) => {
           options={options}
         >
           {marker && (
-            <BlueCircleMarker marker={marker} accuracy={myaccuracy} /> 
+            <BlueCircleMarker marker={marker} accuracy={myaccuracy} />
           )}
         </GoogleMap>
       </LoadScript>
