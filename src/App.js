@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import React, { useState } from "react";
+import SpotifyNowPlaying from "./currentplaying.js";
+import MapComponent from './Googlemap';
+import Login from './Login';
+import LoggedIn from './ LoggedIn.js';
+
+const App = (prop) => {
+  const [marker, setMarker] = useState({
+    lat: 35.658584,
+    lng: 139.745433,
+  });
+
+  
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div> 
+
+        <app></app>
+
+      <SpotifyNowPlaying /> {/* Spotifyの現在の再生曲情報 */}
+      <MapComponent marker={marker} setMarker={setMarker} /> {/* Mapのコンポーネント */}
     </div>
   );
-}
+
+};
 
 export default App;
