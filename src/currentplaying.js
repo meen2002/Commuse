@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // 現在の曲情報を取得する関数
 async function fetchCurrentlyPlaying() {
   try {
-    const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+    const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing?market=JP', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("spotifyToken")}`,
       },
@@ -22,13 +22,13 @@ async function fetchCurrentlyPlaying() {
   }
 }
 
-const SpotifyNowPlaying = ({ token }) => {
+const SpotifyNowPlaying = () => {
   const [song, setSong] = useState({});
 
   useEffect(() => {
     // 曲情報を定期的に取得する（例えば10秒ごと）
     const intervalId = setInterval(() => {
-      fetchCurrentlyPlaying(token).then((data) => {
+      fetchCurrentlyPlaying().then((data) => {
         if (data) {
           setSong(data);
         }
@@ -40,7 +40,7 @@ const SpotifyNowPlaying = ({ token }) => {
 
     // クリーンアップ
     return () => clearInterval(intervalId);
-  }, [token, song]);
+  }, [song]);
 
   return (
     //ちゃんとデータが取れたらコメントアウトを解除
