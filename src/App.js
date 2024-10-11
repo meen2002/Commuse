@@ -9,20 +9,20 @@ import LogoutButton from './LogoutButton.js';
 const App = () => {
   let [isLogin, setIsLogin] = useState(false)
 
-  const setLoginState = (state) => {
-    setIsLogin(state)
-  }
 
   return (
     <div>
-      {isLogin ? (
+      {localStorage.getItem("spotifyToken")}
+      {!isLogin ? (
+        //ログイン状態じゃないなら
+        <Loginbotton isLogin={isLogin} setIsLogin={setIsLogin} ></ Loginbotton>
+      ) : (
+        //ログイン状態なら
         <>
-          <LogoutButton isLogin={isLogin} setLoginState={setLoginState} />
-          <SpotifyNowPlaying />
+          <LogoutButton isLogin={isLogin} setIsLogin={setIsLogin} />
+          <SpotifyNowPlaying token={localStorage.getItem("spotifyToken")}/>
           <MapComponent />
         </>
-      ) : (
-        <Loginbotton isLogin={isLogin} setLoginState={setLoginState} ></ Loginbotton>
       )}
     </div>
   );

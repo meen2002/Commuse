@@ -15,7 +15,7 @@ function Loginbotton(props) {
     if (hash_token) {
       localStorage.setItem('spotifyToken', hash_token);
       setToken(localStorage.getItem("spotifyToken"))
-      props.setLoginState(true) //ログアウト状態ならログイン状態にする
+      props.setIsLogin(true) //ログアウト状態ならログイン状態にする
     }
   }, [props, token]);
 
