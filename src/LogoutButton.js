@@ -13,8 +13,8 @@ function LogoutButton(props) {
             setToken(localStorage.getItem("spotifyToken"))
 
             window.location.reload(); // ページをリロードしてログイン画面に戻る
-            
-            props.setLoginState(false) //ログイン状態ならログアウト状態にする
+
+            props.setIsLogin(false) //ログイン状態ならログアウト状態にする
         }
     };
 
