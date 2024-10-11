@@ -20,7 +20,7 @@ const App = () => {
         //ログイン状態なら
         <>
           <LogoutButton isLogin={isLogin} setIsLogin={setIsLogin} />
-          <SpotifyNowPlaying token={localStorage.getItem("spotifyToken")}/>
+          <SpotifyNowPlaying />
           <MapComponent />
         </>
       )}
