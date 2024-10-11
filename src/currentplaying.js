@@ -15,8 +15,7 @@ async function fetchCurrentlyPlaying(token) {
     }
     
 
-    const data = await response.json();
-    return data;
+    return response.body;
   } catch (error) {
     console.error("Error fetching currently playing song:", error);
     return null;
@@ -47,11 +46,14 @@ const SpotifyNowPlaying = ({ token }) => {
   }
 
   return (
-    <div>
-      <h3>Now Playing: {song.item.name}</h3>
-      <p>Artist: {song.item.artists.map(artist => artist.name).join(", ")}</p>
-      <img src={song.item.album.images[0].url} alt="Album cover" width="100" />
-    </div>
+    //ちゃんとデータが取れたらコメントアウトを解除
+    <p>再生中</p>
+    
+    // <div>
+    //   <h3>Now Playing: {song.item.name}</h3>
+    //   <p>Artist: {song.item.artists.map(artist => artist.name).join(", ")}</p>
+    //   <img src={song.item.album.images[0].url} alt="Album cover" width="100" />
+    // </div>
   );
 };
 
