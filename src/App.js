@@ -3,25 +3,29 @@ import './App.css';
 import React, { useState } from "react";
 import SpotifyNowPlaying from "./currentplaying.js";
 import MapComponent from './Googlemap';
-import Loginbotton from './SpotifyApp.js';
+import Loginbotton from './LoginButton.js';
+import LogoutButton from './LogoutButton.js';
 
-const App= () => {
+const App = () => {
   let [isLogin, setIsLogin] = useState(false)
 
-  const toggleLoginState = () => {
-    setIsLogin(!isLogin)
+  const setLoginState = (state) => {
+    setIsLogin(state)
   }
 
   return (
-    <div> 
-      // if !login
-      <Loginbotton isLogin={isLogin} toggleLoginState={toggleLoginState} ></ Loginbotton>
-
-      /else
-      <SpotifyNowPlaying /> {/* Spotifyの現在の再生曲情報 */}
-      <MapComponent /> {/* Mapのコンポーネント */}
+    <div>
+      {isLogin ? (
+        <>
+          <LogoutButton isLogin={isLogin} setLoginState={setLoginState} />
+          <SpotifyNowPlaying />
+          <MapComponent />
+        </>
+      ) : (
+        <Loginbotton isLogin={isLogin} setLoginState={setLoginState} ></ Loginbotton>
+      )}
     </div>
-    );
+  );
 
 
 };
