@@ -1,11 +1,81 @@
-
-.square {
-  height: 34px;
-  width: 34px;
-}
-
-.board-row{
-  place-content: center;
+.song-container {
   display: flex;
+  align-items: center;
 }
 
+
+.album-cover {
+  margin-right: 8px;
+  width: 50px; /* アルバムカバーの幅 */
+  height: 50px; /* アルバムカバーの高さ */
+}
+
+.song-text {
+  display: flex;
+  flex-direction: column; /* 曲名とアーティスト名を縦に並べる */
+  justify-content: center; /* 中央揃え */
+}
+
+.song-title {
+  font-size:13px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  line-height: 1.4; /* 行間を小さく */
+  white-space: nowrap;  /* 1行に制限 */
+  overflow: hidden;     /* はみ出す部分を隠す */
+  max-width: 120px;     /* 最大幅を設定 */
+  display: inline-block; /* インライン要素にすることで横にスクロール可能に */
+  position: relative;   /* 相対位置に設定 */
+}
+
+.song-title span {
+  display: inline-block;
+  white-space: nowrap;   /* 1行に制限 */
+  animation: scrollText 10s linear infinite; /* アニメーション設定 */
+}
+
+.artist-name {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+  line-height: 1.4; /* 行間を小さく */
+  white-space: nowrap;         /* 1行に制限 */
+  overflow: hidden;            /* はみ出す部分を隠す */
+  text-overflow: ellipsis;     /* 省略記号(...)を表示 */
+  max-width: 120px; 
+  display: inline-block; /* インライン要素にすることで横にスクロール可能に */
+  position: relative;   /* 相対位置に設定 */  
+}
+
+.artist-name span {
+  display: inline-block;
+  white-space: nowrap;   /* 1行に制限 */
+  animation: scrollText 10s linear infinite; /* アニメーション設定 */
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0%); /* 初期位置（右端） */
+  }
+  30%{
+    transform: translateX(0%);
+  }
+  95% {
+    transform: translateX(-100%); /* 最終位置（左端） */
+  }
+  100%{
+    transform: translateX(-100%);
+  }
+}
+
+.no-song-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; /* 角を丸くしたい場合は追加 */
+  height: 50px; /* 高さを指定 */
+  width: 50px; /* 幅を指定 */
+  background-color: #ccc; /* グレー色 */
+  margin-right: 8px; /* アルバムカバーと同じ間隔 */
+}

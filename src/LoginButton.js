@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { getTokenFromUrl } from './getToken.js';
-import { accessUrl } from "./getToken";
-
+import { accessUrl } from "./getToken.js";
 
 function Loginbotton(props) {
-
-  const [token, setToken] = useState(localStorage.getItem("spotifyToken"))
+  const [token, setToken] = useState(localStorage.getItem("spotifyToken"));
 
   useEffect(() => {
-    const hash_token = getTokenFromUrl().access_token;
-    console.log(hash_token, "tin"); // トークンが正しく取得できているか確認
-    window.location.hash = "";
-
-    if (hash_token) {
-      localStorage.setItem('spotifyToken', hash_token);
-      setToken(localStorage.getItem("spotifyToken"))
-      props.setIsLogin(true) //ログアウト状態ならログイン状態にする
+    const storedToken = localStorage.getItem("spotifyToken");
+    if (storedToken) {
+      setToken(storedToken); // ローカルストレージにあるトークンをセット
+      props.setIsLogin(true); // ログイン状態を維持
+    } else {
+      const hash_token = getTokenFromUrl().access_token;
+      if (hash_token) {
+        localStorage.setItem('spotifyToken', hash_token);
+        setToken(hash_token);
+        props.setIsLogin(true);
+      }
     }
-  }, [props, token]);
+    window.location.hash = ""; // ハッシュをクリア
+  }, [props]);
 
   return (
     <div className="App">
@@ -28,4 +30,3 @@ function Loginbotton(props) {
 }
 
 export default Loginbotton;
-

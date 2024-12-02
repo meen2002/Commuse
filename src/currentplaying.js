@@ -1,67 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import LogoutButton from './LogoutButton';
 
-// 現在の曲情報を取得する関数
 async function fetchCurrentlyPlaying() {
   try {
     const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing?market=JP', {
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem("spotifyToken")}`,
+        "Authorization": `Bearer ${localStorage.getItem("spotifyToken")}`,
       },
     });
 
-    if (response.status === 204 || response.status === 401) {
-      // 204: 再生中の曲がない、401: トークンが無効
-      return console.log(response.status);
+    if (response.status === 200) {
+      const data = await response.json();
+      return { data, status: 200 };
+    } else {
+      return { status: response.status };
     }
-
-
-    return response.body;
   } catch (error) {
     console.error("Error fetching currently playing song:", error);
     return null;
   }
 }
 
-const SpotifyNowPlaying = () => {
-  const [song, setSong] = useState({});
-
+const SpotifyNowPlaying = (props) => {
   useEffect(() => {
-    // 曲情報を定期的に取得する（例えば10秒ごと）
     const intervalId = setInterval(() => {
-      fetchCurrentlyPlaying().then((data) => {
-        if (data) {
-          setSong(data);
-        }
+      fetchCurrentlyPlaying().then(response => {
+        props.setStatus(response?.status);        
+        if (response?.status === 200 && response.data?.item) {
+          props.onSongUpdate({
+            name: response.data.item.name,
+            artists: response.data.item.artists.map(artist => artist.name).join(", "),
+            albumCover: response.data.item.album.images[0].url,
+          });
+        } else if (response?.status === 204) {
+          props.onSongUpdate(null); // 再生されていない場合はnullを設定
+        } else if (response?.status === 401) {
+          props.setSessionOut(true); 
+        } 
+          
       });
-      console.log(song)
+    }, 5000);
 
-    }, 10000); // 10秒ごとに更新
-
-
-    // クリーンアップ
     return () => clearInterval(intervalId);
-  }, [song]);
+  }, [props]);
 
-  return (
-    //ちゃんとデータが取れたらコメントアウトを解除
+   
 
-    <>
-      {Object.keys(song).length === 0 ? (
-        <div>No song is currently playing.</div>
-
-      ) : (
-        <p> 再生中</p >
-      )}
-    </>
-
-    // <div>
-    //   <h3>Now Playing: {song.item.name}</h3>
-    //   <p>Artist: {song.item.artists.map(artist => artist.name).join(", ")}</p>
-    //   <img src={song.item.album.images[0].url} alt="Album cover" width="100" />
-    // </div>
-
-
-  );
-};
+  return null;
+}
 
 export default SpotifyNowPlaying;

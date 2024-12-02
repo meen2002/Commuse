@@ -1,24 +1,37 @@
-
 import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, LoadScriptNext} from "@react-google-maps/api";
 import BlueCircleMarker from "./Todo.js"; // マーカーをインポート
+import Others from "./others.js";
+import SongComponent from "./contents.js";
+
 
 const MapComponent =() => {
+  const [clicked, setClicked] = useState(false); // clicked 状態を管理
+
+  // 子コンポーネントから clicked の値を受け取る関数
+  const handleMarkerClick = (newClickedState) => {
+    setClicked(newClickedState); // clicked の値を更新
+    console.log(clicked)
+  };
   const [marker,setMarker]=useState({
+    lat:35.658584,
+    lng:139.745433,
+  })
+  const [song, setSong] = useState(null);
+  const [otherMarker,setotherMarker]=useState({
     lat:35.658584,
     lng:139.745433,
   })
   const [mylatlon, setMylatlon] = useState(marker);
   const [error, setError] = useState(null);
-  const [myaccuracy, setMyaccuracy] = useState(null);
-
+  const [myaccuracy, setMyaccuracy] = useState(null);  
   const containerStyle = {
     width: "100%",
     height: "100vh",
   };
 
   const options = {
-    mapTypeControl: false,
+    mapTypeControl: true,
     streetViewControl: false,
     fullscreenControl: false,
     zoomControl: true,
@@ -33,6 +46,7 @@ const MapComponent =() => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
+          
           setMylatlon(newLatLon); // 現在地を更新
           setMarker(newLatLon);   // 親コンポーネントにも反映
           setMyaccuracy(newAccuracy);
@@ -42,7 +56,7 @@ const MapComponent =() => {
         },
         {
           enableHighAccuracy: true,
-          timeout: 5000,
+          timeout: 1000,
           maximumAge: 0,
         }
       );
@@ -50,13 +64,14 @@ const MapComponent =() => {
     } else {
       setError("このブラウザでは位置情報がサポートされていません。");
     }
+    
   }, [setMarker]);
 
   return (
     <>
-      {error && <p>Error: {error}</p>}
-      <LoadScript googleMapsApiKey="AIzaSyCotC5VerJNRwfjL2CIfLBN9O2SpbVoLe4">
-
+    
+      {/* {error && <p>Error: {error}</p>} */}
+      <LoadScriptNext googleMapsApiKey="AIzaSyCotC5VerJNRwfjL2CIfLBN9O2SpbVoLe4">
         <GoogleMap
           center={mylatlon}
           zoom={18}
@@ -64,10 +79,19 @@ const MapComponent =() => {
           options={options}
         >
           {marker && (
-            <BlueCircleMarker marker={marker} accuracy={myaccuracy} />
+            <BlueCircleMarker marker={marker} accuracy={myaccuracy} onClickedChange={handleMarkerClick}/>
+          )}
+          {otherMarker &&(
+            <Others marker={otherMarker} />
+          )}
+          
+          {clicked && (
+        <SongComponent
+        marker={marker} 
+        ></SongComponent>
           )}
         </GoogleMap>
-      </LoadScript>
+      </LoadScriptNext>
     </>
   );
 };
