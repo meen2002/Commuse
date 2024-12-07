@@ -18,9 +18,9 @@ const App = () => {
   const handleLogout = LogoutHandler({ setIsLogin });
   const [profileImage, setProfileImage] = useState(null);
 
-  // const handleSessionOut = (newSessionStatus)=>{
-  //   setSessionOut(newSessionStatus)
-  // }
+  const handleSessionOut = (newSessionStatus)=>{
+    setSessionOut(newSessionStatus)
+  }
 
 
 
@@ -50,11 +50,11 @@ const App = () => {
           <SpotifyNowPlaying 
           onSongUpdate={setSong}
           setStatus={setStatus}
-          // handleSessionOut={handleSessionOut}
-          /> 
+          handleSessionOut={handleSessionOut}
+          >
+          </SpotifyNowPlaying> 
           {/* <SpotifyProfile onImageChange={handleProfileImage} /> */}
 
-          
           <MapComponent/>
           
         </>
