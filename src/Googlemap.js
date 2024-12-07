@@ -8,6 +8,8 @@ import SongComponent from "./contents.js";
 const MapComponent =() => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
 
+  const profileImage = "https://example.com/profile.jpg"; // プロフィール画像のURL
+
   // 子コンポーネントから clicked の値を受け取る関数
   const handleMarkerClick = (newClickedState) => {
     setClicked(newClickedState); // clicked の値を更新
@@ -79,7 +81,10 @@ const MapComponent =() => {
           options={options}
         >
           {marker && (
-            <BlueCircleMarker marker={marker} accuracy={myaccuracy} onClickedChange={handleMarkerClick}/>
+            <BlueCircleMarker marker={marker} 
+            accuracy={myaccuracy} 
+            onClickedChange={handleMarkerClick} 
+            profileImage={profileImage} />
           )}
           {otherMarker &&(
             <Others marker={otherMarker} />
@@ -87,9 +92,14 @@ const MapComponent =() => {
           
           {clicked && (
         <SongComponent
-        marker={marker} 
-        ></SongComponent>
+        marker={marker} >
+        </SongComponent>
           )}
+          
+        <SongComponent
+        marker={otherMarker}>
+        </SongComponent>
+
         </GoogleMap>
       </LoadScriptNext>
     </>

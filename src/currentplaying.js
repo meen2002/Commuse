@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import LogoutButton from './LogoutButton';
+
 
 async function fetchCurrentlyPlaying() {
   try {
@@ -23,10 +23,19 @@ async function fetchCurrentlyPlaying() {
 }
 
 const SpotifyNowPlaying = (props) => {
+
+  const handleStatusChange = (session) => {
+    if (session){
+    props.handleSessionOut(true)
+    }
+  };
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       fetchCurrentlyPlaying().then(response => {
-        props.setStatus(response?.status);        
+        props.setStatus(response?.status);  
+        
+
         if (response?.status === 200 && response.data?.item) {
           props.onSongUpdate({
             name: response.data.item.name,
@@ -35,15 +44,17 @@ const SpotifyNowPlaying = (props) => {
           });
         } else if (response?.status === 204) {
           props.onSongUpdate(null); // 再生されていない場合はnullを設定
-        } else if (response?.status === 401) {
-          props.setSessionOut(true); 
         } 
+        else if (response?.status === 401) {
           
+          handleStatusChange(true); 
+        } 
+        
       });
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [props]);
+  }, []);
 
    
 
