@@ -24,11 +24,11 @@ async function fetchCurrentlyPlaying() {
 
 const SpotifyNowPlaying = (props) => {
 
-  const handleStatusChange = (session) => {
-    if (session){
-    props.handleSessionOut(true)
-    }
-  };
+  // const handleStatusChange = (session) => {
+  //   if (session){
+  //   props.handleSessionOut(session)
+  //   }
+  // };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -47,7 +47,7 @@ const SpotifyNowPlaying = (props) => {
         } 
         else if (response?.status === 401) {
           
-          handleStatusChange(true); 
+          // handleStatusChange(true); 
         } 
         
       });
