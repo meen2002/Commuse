@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getTokenFromUrl } from './getToken.js';
 
 const SpotifyProfile = ({ onImageChange }) => {
   const [userInfo, setUserInfo] = useState(null);
@@ -10,7 +11,7 @@ const SpotifyProfile = ({ onImageChange }) => {
       axios
         .get('https://api.spotify.com/v1/me', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("spotifyToken")}`,
+            Authorization: `Bearer ${localStorage.getItem((getTokenFromUrl().access_token))}`,
           },
         })
         .then((response) => {

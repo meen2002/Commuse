@@ -50,6 +50,7 @@ const SongComponent =({marker}) => {
         <SpotifyNowPlaying
           onSongUpdate={setSong} // 曲情報を更新
           setStatus={(status) => console.log("Spotify status:", status)}
+          
           />)}
 
     </>

@@ -1,9 +1,11 @@
 import React from 'react';
+import { getTokenFromUrl } from './getToken.js';
 
 const LogoutHandler = ({ setIsLogin }) => {
   // ログアウト処理
   const handleLogout = () => {
-    localStorage.removeItem('spotifyToken'); // トークンを削除
+    localStorage.removeItem((getTokenFromUrl().access_token));
+   // トークンを削除
     setIsLogin(false); // ログイン状態をfalseに設定
     window.location.reload(); // ページをリロードしてログイン画面に戻る
   };

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-
+import { getTokenFromUrl } from './getToken.js';
 
 async function fetchCurrentlyPlaying() {
   try {
     const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing?market=JP', {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem("spotifyToken")}`,
+        "Authorization": `Bearer ${localStorage.getItem((getTokenFromUrl().access_token))}`,
       },
     });
 
@@ -24,14 +24,16 @@ async function fetchCurrentlyPlaying() {
 
 const SpotifyNowPlaying = (props) => {
 
-  const handleStatusChange = (session) => {
-    if (session){
-      console.log(session)
-      props.handleSessionOut(true);
-    }
-  };
+
 
   useEffect(() => {
+    const handleStatusChange = (session) => {
+      if (session){
+        console.log(session);
+        props.handleSessionOut(true);
+      }
+    };
+
     const intervalId = setInterval(() => {
       fetchCurrentlyPlaying().then(response => {
         props.setStatus(response?.status);  

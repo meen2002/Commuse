@@ -6,6 +6,7 @@ import Loginbotton from './LoginButton.js';
 import LogoutButton from './LogoutButton.js';
 import LogoutHandler from './handleLogout.js';
 import SpotifyProfile from './getProfile.js';
+import { getTokenFromUrl } from './getToken.js';
 
 
 
@@ -14,15 +15,18 @@ const App = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [status, setStatus] = useState(null); // ステータスを追加
   const [song, setSong] = useState(null);
-  const [sessionOut, setSessionOut] = useState(false);
+  const [sessionOut, setSessionOut] = useState(null);
   const handleLogout = LogoutHandler({ setIsLogin });
   const [profileImage, setProfileImage] = useState(null);
 
   const handleSessionOut = (newSessionStatus)=>{
     setSessionOut(newSessionStatus)
+    console.log(sessionOut)
   }
 
+  
 
+  // const token=localStorage.getItem((getTokenFromUrl().access_token));
 
   const handleProfileImage = (images) => {
     setProfileImage(images); // 画像を親の状態にセット
@@ -33,26 +37,26 @@ const App = () => {
 
 
 
-  return (
-    
+  return (   
     <div>
       
-      {/* {localStorage.getItem("spotifyToken")} */}
+      {/* {localStorage.getItem((getTokenFromUrl().access_token))} */}
       {!isLogin ? (
         <Loginbotton isLogin={isLogin} setIsLogin={setIsLogin} />
         
         
       ) : (
         <>
-          {sessionOut && <p>Spotifyトークンの有効期限が切れました</p>}
-          <LogoutButton onLogout={handleLogout} />
+
+{sessionOut ===401 && <p>Spotifyトークンの有効期限が切れました</p>}
+
           
-          <SpotifyNowPlaying 
-          onSongUpdate={setSong}
-          setStatus={setStatus}
-          handleSessionOut={handleSessionOut}
-          >
-          </SpotifyNowPlaying> 
+          <LogoutButton onLogout={handleLogout} />
+
+          <SpotifyNowPlaying
+          onSongUpdate={setSong} // 曲情報を更新
+          setStatus={(status) => handleSessionOut(status)}
+          />
           {/* <SpotifyProfile onImageChange={handleProfileImage} /> */}
 
           <MapComponent/>
