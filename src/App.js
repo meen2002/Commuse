@@ -21,7 +21,7 @@ const App = () => {
 
   const handleSessionOut = (newSessionStatus)=>{
     setSessionOut(newSessionStatus)
-    console.log(sessionOut)
+    // console.log(sessionOut)
   }
 
   

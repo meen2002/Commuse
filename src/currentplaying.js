@@ -27,13 +27,7 @@ const SpotifyNowPlaying = (props) => {
 
 
   useEffect(() => {
-    const handleStatusChange = (session) => {
-      if (session){
-        console.log(session);
-        props.handleSessionOut(true);
-      }
-    };
-
+    
     const intervalId = setInterval(() => {
       fetchCurrentlyPlaying().then(response => {
         props.setStatus(response?.status);  
@@ -45,14 +39,10 @@ const SpotifyNowPlaying = (props) => {
             artists: response.data.item.artists.map(artist => artist.name).join(", "),
             albumCover: response.data.item.album.images[0].url,
           });
-        } else if (response?.status === 204) {
+        } else {
           props.onSongUpdate(null); // 再生されていない場合はnullを設定
         } 
-        else if (response?.status === 401) {
-          
-          handleStatusChange(true); 
-        } 
-        
+
       });
     }, 5000);
 

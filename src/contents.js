@@ -4,15 +4,17 @@ import CustomOverlayView from "./window.js";
 
 
 
-const SongComponent =({marker}) => {
+const SongComponent =(props) => {
+
   const [song, setSong] = useState(null);
+
 
   return (
     <>    
           {
   !song ? (
     <CustomOverlayView
-        position={marker}
+        position={props.marker}
         content={
           <div className="song-container">
       <div className="no-song-placeholder" style={{ backgroundColor: '#ccc', width: '50px', height: '50px', marginRight: '8px' }}></div>
@@ -23,9 +25,9 @@ const SongComponent =({marker}) => {
         }
       />
   ) : (
-    marker && (
+    props.marker && (
       <CustomOverlayView
-        position={marker}
+        position={props.marker}
         content={
           <div className="song-container">
   <img src={song.albumCover} alt="Album cover" className="album-cover" width="50" />
@@ -49,8 +51,8 @@ const SongComponent =({marker}) => {
         {setSong &&(
         <SpotifyNowPlaying
           onSongUpdate={setSong} // 曲情報を更新
-          setStatus={(status) => console.log("Spotify status:", status)}
-          
+          setStatus={(status) => console.log(status)}
+
           />)}
 
     </>
