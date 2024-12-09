@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import SpotifyNowPlaying from "./currentplaying.js";
 import CustomOverlayView from "./window.js";
 
-
-
 const SongComponent =(props) => {
 
   const [song, setSong] = useState(null);
-
-
   return (
     <>    
           {

@@ -5,10 +5,10 @@ import Others from "./others.js";
 import SongComponent from "./contents.js";
 
 
+
 const MapComponent =() => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
 
-  const profileImage = "https://example.com/profile.jpg"; // プロフィール画像のURL
 
   // 子コンポーネントから clicked の値を受け取る関数
   const handleMarkerClick = (newClickedState) => {
@@ -84,17 +84,19 @@ const MapComponent =() => {
             <BlueCircleMarker marker={marker} 
             accuracy={myaccuracy} 
             onClickedChange={handleMarkerClick} 
-            profileImage={profileImage} />
+             />
           )}
           {otherMarker &&(
             <Others marker={otherMarker} />
           )}
-          
-          {clicked && (
+
+          {clicked &&(
         <SongComponent
-        marker={marker} >
+        marker={marker}
+         >
         </SongComponent>
-          )}
+          )};
+
           
         <SongComponent
         marker={otherMarker}>

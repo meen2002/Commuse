@@ -2,32 +2,34 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getTokenFromUrl } from './getToken.js';
 
-const SpotifyProfile = ({ onImageChange }) => {
+const SpotifyProfile = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [error, setError] = useState(null);
+  const username = localStorage.getItem(getTokenFromUrl().access_token+"userName")
 
   useEffect(() => {
+    const token = localStorage.getItem(getTokenFromUrl().access_token);
 
+    
+    
+    if (token) {
       axios
         .get('https://api.spotify.com/v1/me', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem((getTokenFromUrl().access_token))}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
           setUserInfo(response.data);
+          // 親コンポーネントにデータを渡す
 
-          // if (response.data.images && response.data.images.length > 0) {
-          //   onImageChange(response.data.images);  // コールバックで親に画像情報を渡す
-          // }
         })
-        
         .catch((error) => {
           setError(error.response ? error.response.data : error.message);
         });
-  }, [onImageChange]);
+    }
+  }, [localStorage.getItem(getTokenFromUrl().access_token)]);
 
-  // ローディング中やエラーメッセージの処理
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -36,9 +38,13 @@ const SpotifyProfile = ({ onImageChange }) => {
     return <div>Loading...</div>;
   }
 
+if (userInfo){
+  localStorage.setItem(getTokenFromUrl().access_token+"userName",userInfo.display_name)
+}
+
   return (
     <div className="spotify-profile">
-      <h2>{userInfo.display_name}</h2>
+      <h2>{username}</h2>
       {userInfo.images.length > 0 ? (
         <img
           src={userInfo.images[0].url}
@@ -50,8 +56,8 @@ const SpotifyProfile = ({ onImageChange }) => {
         <div>No profile image</div>
       )}
     </div>
-
   );
+
 };
 
 export default SpotifyProfile;

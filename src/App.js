@@ -24,16 +24,12 @@ const App = () => {
     // console.log(sessionOut)
   }
 
+
   
 
   // const token=localStorage.getItem((getTokenFromUrl().access_token));
 
-  const handleProfileImage = (images) => {
-    setProfileImage(images); // 画像を親の状態にセット
-  // const handleProfileImage = (images) => {
-  //   setProfileImage(images); // imagesを親の状態にセット
-  // };
-}
+
 
 
 
@@ -50,14 +46,17 @@ const App = () => {
 
 {sessionOut ===401 && <p>Spotifyトークンの有効期限が切れました</p>}
 
-          
+
+          <SpotifyProfile/>
+
           <LogoutButton onLogout={handleLogout} />
 
           <SpotifyNowPlaying
           onSongUpdate={setSong} // 曲情報を更新
           setStatus={(status) => handleSessionOut(status)}
           />
-          {/* <SpotifyProfile onImageChange={handleProfileImage} /> */}
+
+
 
           <MapComponent/>
           

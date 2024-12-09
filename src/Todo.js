@@ -5,7 +5,7 @@ import {
 import { useState} from "react";
 
 
-const BlueCircleMarker = ({ marker, accuracy, onClickedChange, profileImage}) => {
+const BlueCircleMarker = ({ marker, accuracy, onClickedChange, }) => {
   const [clicked,setClicked] = useState(false)
 
   const showinfo = () => {
