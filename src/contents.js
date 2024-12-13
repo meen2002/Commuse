@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SpotifyNowPlaying from "./currentplaying.js";
 import CustomOverlayView from "./window.js";
+import userData from "./send.js";
 
 const SongComponent =(props) => {
 
@@ -9,6 +10,8 @@ const SongComponent =(props) => {
     <>    
           {
   !song ? (
+
+    <>
     <CustomOverlayView
         position={props.marker}
         content={
@@ -20,24 +23,29 @@ const SongComponent =(props) => {
     </div>
         }
       />
+      <sendUserData marker={props.marker} song={null}></sendUserData>
+      </>
   ) : (
     props.marker && (
+      <>
       <CustomOverlayView
         position={props.marker}
         content={
           <div className="song-container">
-  <img src={song.albumCover} alt="Album cover" className="album-cover" width="50" />
-  <div className="song-text">
-    <h3 className="song-title">
-      <span>{`${song.name}`}</span>
-    </h3>
-    <p className="artist-name">
-      <span>{`${song.artists}`}</span>
-    </p>
-  </div>
-</div>
+            <img src={song.albumCover} alt="Album cover" className="album-cover" width="50" />
+            <div className="song-text">
+              <h3 className="song-title">
+                <span>{`${song.name}`}</span>
+                </h3>
+                <p className="artist-name">
+                  <span>{`${song.artists}`}</span>
+                  </p>
+            </div>
+         </div>
         }
       />
+      <userData marker={props.marker} song={song}></userData>
+      </>
     )
   )
 }
@@ -48,8 +56,9 @@ const SongComponent =(props) => {
         <SpotifyNowPlaying
           onSongUpdate={setSong} // 曲情報を更新
           setStatus={(status) => console.log(status)}
-
-          />)}
+          />
+          
+          )}
 
     </>
   );

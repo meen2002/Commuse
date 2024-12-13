@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScriptNext} from "@react-google-maps/api";
+import { GoogleMap, LoadScriptNext, Marker} from "@react-google-maps/api";
 import BlueCircleMarker from "./Todo.js"; // マーカーをインポート
 import Others from "./others.js";
 import SongComponent from "./contents.js";
+
 
 
 
@@ -71,8 +72,7 @@ const MapComponent =() => {
 
   return (
     <>
-    
-      {/* {error && <p>Error: {error}</p>} */}
+
       <LoadScriptNext googleMapsApiKey="AIzaSyCotC5VerJNRwfjL2CIfLBN9O2SpbVoLe4">
         <GoogleMap
           center={mylatlon}
@@ -103,7 +103,11 @@ const MapComponent =() => {
         </SongComponent>
 
         </GoogleMap>
+
+
       </LoadScriptNext>
+
+
     </>
   );
 };

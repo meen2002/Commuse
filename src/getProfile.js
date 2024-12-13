@@ -7,6 +7,7 @@ const SpotifyProfile = () => {
   const [error, setError] = useState(null);
   const username = localStorage.getItem(getTokenFromUrl().access_token+"userName")
 
+ 
   useEffect(() => {
     const token = localStorage.getItem(getTokenFromUrl().access_token);
 
@@ -21,14 +22,12 @@ const SpotifyProfile = () => {
         })
         .then((response) => {
           setUserInfo(response.data);
-          // 親コンポーネントにデータを渡す
-
         })
         .catch((error) => {
           setError(error.response ? error.response.data : error.message);
         });
     }
-  }, [localStorage.getItem(getTokenFromUrl().access_token)]);
+  }, [username]);
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -44,7 +43,7 @@ if (userInfo){
 
   return (
     <div className="spotify-profile">
-      <h2>{username}</h2>
+      <p>{username}</p>
       {userInfo.images.length > 0 ? (
         <img
           src={userInfo.images[0].url}
