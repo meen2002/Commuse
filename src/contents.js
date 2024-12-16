@@ -8,7 +8,6 @@ const SongComponent =(props) => {
   const [song, setSong] = useState(null);
   const [userName, setUserName] = useState("");
   useEffect(() => {
-    const tokenKey = getTokenFromUrl().access_token + "userName";
     const storedUserName = localStorage.getItem(getTokenFromUrl().access_token+"userName")
     setUserName(storedUserName || "Unknown User"); // 値がなければ "Unknown User" を設定
   }, []);
@@ -33,7 +32,6 @@ const SongComponent =(props) => {
     </div>
         }
       />
-      <sendUserData marker={props.marker} song={null}></sendUserData>
       </>
   ) : (
     props.marker && (
@@ -59,7 +57,6 @@ const SongComponent =(props) => {
          </div>
         }
       />
-      {/* <userData marker={props.marker} song={song}></userData> */}
       </>
     )
   )

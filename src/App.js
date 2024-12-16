@@ -22,9 +22,14 @@ const App = () => {
 
   const handleSessionOut = (newSessionStatus)=>{
     setSessionOut(newSessionStatus)
-
   }
 
+  const [trackId, setTrackId] = useState(null);
+
+  // const handleTrackIdUpdate = (newTrackId) => {
+  //   setTrackId(newTrackId);
+  //   console.log("Received Track ID:", newTrackId);
+    
   return (   
     <div>
       
@@ -38,7 +43,7 @@ const App = () => {
         {sessionOut ===401 ?
         (<p>Spotifyトークンの有効期限が切れました</p>)
         :(
-          <SpotifyProfile/>
+           <SpotifyProfile/>
         )
         }
 
@@ -48,6 +53,7 @@ const App = () => {
           <SpotifyNowPlaying
           onSongUpdate={setSong} // 曲情報を更新
           setStatus={(status) => handleSessionOut(status)}
+          // onTrackIdUpdate={handleTrackIdUpdate} 
           />
 
           <MapComponent/>
@@ -64,5 +70,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;
