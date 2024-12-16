@@ -7,6 +7,7 @@ import LogoutButton from './LogoutButton.js';
 import LogoutHandler from './handleLogout.js';
 import SpotifyProfile from './getProfile.js';
 import { getTokenFromUrl } from './getToken.js';
+import UserInfoFetcher from './Get.js';
 
 
 
@@ -50,6 +51,8 @@ const App = () => {
           />
 
           <MapComponent/>
+
+          <UserInfoFetcher></UserInfoFetcher>
 
 
 
