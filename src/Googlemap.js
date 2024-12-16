@@ -6,7 +6,7 @@ import SongComponent from "./contents.js";
 
 
 
-const MapComponent =() => {
+const MapComponent =({ onMarkerUpdate }) => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
 
 
@@ -52,6 +52,9 @@ const MapComponent =() => {
           setMylatlon(newLatLon); // 現在地を更新
           setMarker(newLatLon);   // 親コンポーネントにも反映
           setMyaccuracy(newAccuracy);
+          if (onMarkerUpdate) {
+            onMarkerUpdate(newLatLon);
+          }
         },
         (error) => {
           setError(error.message); // エラーを保存

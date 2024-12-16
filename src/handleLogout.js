@@ -1,14 +1,49 @@
 import React from 'react';
-import { getTokenFromUrl } from './getToken.js';
 
 const LogoutHandler = ({ setIsLogin }) => {
   // ログアウト処理
   const handleLogout = () => {
-    localStorage.removeItem(getTokenFromUrl().access_token);
-    localStorage.removeItem(getTokenFromUrl().access_token+"userName")
-   // トークンを削除
-    setIsLogin(false); // ログイン状態をfalseに設定
-    window.location.reload(); // ページをリロードしてログイン画面に戻る
+    // ローカルストレージ内のSpotify関連データを削除
+    const tempToken = localStorage.getItem("spotify_token_temp");
+
+    if (tempToken) {
+      // ユーザーIDに基づいてキーを生成し削除
+      const fetchUserProfile = async () => {
+        try {
+          const response = await fetch("https://api.spotify.com/v1/me", {
+            headers: {
+              Authorization: `Bearer ${tempToken}`,
+            },
+          });
+
+          if (response.status === 200) {
+            const userData = await response.json();
+            const userId = userData.id;
+
+            // 削除するキー
+            const tokenKey = `spotifyToken_${userId}`;
+            const userNameKey = `${tokenKey}_userName`;
+
+            // トークンとユーザーネームを削除
+            localStorage.removeItem(tokenKey);
+            localStorage.removeItem(userNameKey);
+          }
+        } catch (error) {
+          console.error("ユーザープロファイルの取得中にエラーが発生しました:", error);
+        }
+      };
+
+      fetchUserProfile();
+    }
+
+    // 一時トークンも削除
+    localStorage.removeItem("spotify_token_temp");
+
+    // ログイン状態を解除
+    setIsLogin(false);
+
+    // ページをリロードしてログイン画面に戻る
+    window.location.reload();
   };
 
   return handleLogout; // handleLogout関数を返す
