@@ -11,8 +11,6 @@ const SpotifyProfile = () => {
  
   useEffect(() => {
     const token = localStorage.getItem(getTokenFromUrl().access_token);
-
-    
     
     if (token) {
       axios

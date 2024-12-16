@@ -6,7 +6,6 @@ import SongComponent from "./contents.js";
 
 
 
-
 const MapComponent =() => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
 

@@ -21,35 +21,22 @@ const App = () => {
 
   const handleSessionOut = (newSessionStatus)=>{
     setSessionOut(newSessionStatus)
-    // console.log(sessionOut)
+
   }
-
-
-  
-
-  // const token=localStorage.getItem((getTokenFromUrl().access_token));
-
-
-
-
 
   return (   
     <div>
       
-      {/* {localStorage.getItem((getTokenFromUrl().access_token))} */}
+
       {!isLogin ? (
         <Loginbotton isLogin={isLogin} setIsLogin={setIsLogin} />
         
         
       ) : (
         <>
-
-{sessionOut ===401?
-(<p>Spotifyトークンの有効期限が切れました</p>)
-:( <SpotifyProfile />)
-}
-
-
+        {sessionOut ===401&&
+        (<p>Spotifyトークンの有効期限が切れました</p>)
+        }
 
           <LogoutButton onLogout={handleLogout} />
 
