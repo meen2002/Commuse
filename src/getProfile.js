@@ -5,7 +5,8 @@ import { getTokenFromUrl } from './getToken.js';
 const SpotifyProfile = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [error, setError] = useState(null);
-  const username = localStorage.getItem(getTokenFromUrl().access_token+"userName")
+  const [username, setUsername]= useState("")
+
 
  
   useEffect(() => {
@@ -22,6 +23,7 @@ const SpotifyProfile = () => {
         })
         .then((response) => {
           setUserInfo(response.data);
+          setUsername(localStorage.getItem(getTokenFromUrl().access_token+"userName"))
         })
         .catch((error) => {
           setError(error.response ? error.response.data : error.message);

@@ -15,8 +15,8 @@ const CustomOverlayView = ({position,content}) => {
     ref={divRef}
     style={{
         width: "180px",
-        height: "50px",
-        backgroundColor: "white",
+        height: "70px",
+        backgroundColor: "White",
         padding: "3px",
         boxShadow: "0px 0px 50px rgba(0,0,0,0.3)",
         borderRadius: "8px",  // 角を丸くする
