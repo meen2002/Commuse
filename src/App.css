@@ -12,6 +12,24 @@
   
 }
 
+.spotify-profile{
+  display: flex;
+  align-items: center; /* プロフィールとボタンの高さを揃える */
+  position: relative; /* 相対位置 */
+  padding: 1px 7px; /* 内側の余白 */
+
+}
+
+.profile-image {
+  margin-right: 8px;
+  margin-left: 10px; /* 左の余白 */
+  width: 50px; /* 幅 */
+  height: 50px; /* 高さ */
+  border-radius: 50%; /* 画像を丸型にする */
+  object-fit: cover; /* アスペクト比を維持しながら画像を収める */
+}
+
+
 
 .album-cover {
   margin-right: 8px;
@@ -28,7 +46,10 @@
   text-transform: uppercase;
   position: relative;
   display: inline-block;
-  white-space: nowrap;         /* 1行に制限 */
+  white-space: nowrap; /* 1行に制限 */
+  text-align: left; /* テキストを左揃え */
+  margin-left: 0px; /* アルバムカバーの幅（50px）＋余白（8px）に合わせる */
+  
 }
 
 .song-text {
@@ -99,4 +120,15 @@
   width: 50px; /* 幅を指定 */
   background-color: #ccc; /* グレー色 */
   margin-right: 8px; /* アルバムカバーと同じ間隔 */
+}
+
+.no-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; /* 角を丸くしたい場合は追加 */
+  height: 50px; /* 高さを指定 */
+  width: 50px; /* 幅を指定 */
+  border-radius: 50%; /* 画像を丸型にする */
+  object-fit: cover;
 }

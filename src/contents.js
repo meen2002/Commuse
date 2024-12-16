@@ -2,14 +2,14 @@ import React, { useState,useEffect } from "react";
 import SpotifyNowPlaying from "./currentplaying.js";
 import CustomOverlayView from "./window.js";
 import { getTokenFromUrl } from './getToken.js';
-import userData from "./send.js";
+
 
 const SongComponent =(props) => {
   const [song, setSong] = useState(null);
   const [userName, setUserName] = useState("");
   useEffect(() => {
     const tokenKey = getTokenFromUrl().access_token + "userName";
-    const storedUserName = localStorage.getItem(tokenKey);
+    const storedUserName = localStorage.getItem(getTokenFromUrl().access_token+"userName")
     setUserName(storedUserName || "Unknown User"); // 値がなければ "Unknown User" を設定
   }, []);
 
@@ -23,7 +23,7 @@ const SongComponent =(props) => {
         position={props.marker}
         content={
           <div className="user-container">
-                  <span className="user-name">{userName}</span>
+          <span className="user-name">{userName}</span>
           <div className="song-container">
       <div className="no-song-placeholder" style={{ backgroundColor: '#ccc', width: '50px', height: '50px', marginRight: '8px' }}></div>
       <div>
@@ -45,6 +45,7 @@ const SongComponent =(props) => {
             <span className="user-name">{userName}</span>
           <div className="song-container">
             <img src={song.albumCover} alt="Album cover" className="album-cover" width="50" />
+            
 
             <div className="song-text">
               <h3 className="song-title">

@@ -29,7 +29,7 @@ const MapComponent =() => {
   const [myaccuracy, setMyaccuracy] = useState(null);  
   const containerStyle = {
     width: "100%",
-    height: "100vh",
+    height: "90vh",
   };
 
   const options = {

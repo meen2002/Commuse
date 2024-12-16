@@ -42,17 +42,26 @@ if (userInfo){
 }
 
   return (
+
     <div className="spotify-profile">
-      <p>{username}</p>
       {userInfo.images.length > 0 ? (
+        <>
+
         <img
+        className="profile-image"
           src={userInfo.images[0].url}
           alt="Profile"
-          width="100"
-          height="100"
+          width="50"
+          height="50"
         />
+        <p>{username}</p>
+        </>
       ) : (
-        <div>No profile image</div>
+          <>
+        <div className="no-img-placeholder" 
+        style={{ backgroundColor: '#ccc', width: '50px', height: '50px', marginLeft: '8px' }}></div>
+          <p>{username}</p>
+          </>
       )}
     </div>
   );

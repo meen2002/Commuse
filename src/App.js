@@ -34,9 +34,13 @@ const App = () => {
         
       ) : (
         <>
-        {sessionOut ===401&&
+        {sessionOut ===401 ?
         (<p>Spotifyトークンの有効期限が切れました</p>)
+        :(
+          <SpotifyProfile/>
+        )
         }
+
 
           <LogoutButton onLogout={handleLogout} />
 
