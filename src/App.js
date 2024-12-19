@@ -10,10 +10,12 @@ import UserInfoFetcher from './Get.js';
 import GetUrl from './GetUrl'; // GetUrl をインポート
 
 const App = () => {
+  // ログイン状態をlocalStorageから取得
   const [isLogin, setIsLogin] = useState(() => {
     const savedLoginState = localStorage.getItem("isLogin");
-    return savedLoginState === "true";
+    return savedLoginState === "true"; // "true"として保存されていればログイン状態
   });
+
   const [status, setStatus] = useState(null);
   const [song, setSong] = useState(null);
   const [sessionOut, setSessionOut] = useState(null);
@@ -62,8 +64,9 @@ const App = () => {
     }
   }, [isLogin]);
 
-  useState(() => {
-    localStorage.setItem("isLogin", isLogin);
+  useEffect(() => {
+    // ログイン状態が変更されたとき、localStorageに状態を保存
+    localStorage.setItem("isLogin", isLogin ? "true" : "false");
   }, [isLogin]);
 
   return (
