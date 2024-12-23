@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScriptNext, Marker} from "@react-google-maps/api";
+import { GoogleMap, LoadScriptNext} from "@react-google-maps/api";
 import BlueCircleMarker from "./Todo.js"; // マーカーをインポート
 import Others from "./others.js";
 import SongComponent from "./contents.js";
+import ArrayMap from "./ArrayMap.js";
 
 
 
-const MapComponent =({ onMarkerUpdate }) => {
+const MapComponent =({userName , onMarkerUpdate ,otherData, song}) => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
-
+  
 
   // 子コンポーネントから clicked の値を受け取る関数
   const handleMarkerClick = (newClickedState) => {
@@ -19,11 +20,7 @@ const MapComponent =({ onMarkerUpdate }) => {
     lat:35.658584,
     lng:139.745433,
   })
-  const [song, setSong] = useState(null);
-  const [otherMarker,setotherMarker]=useState({
-    lat:35.658584,
-    lng:139.745433,
-  })
+
   const [mylatlon, setMylatlon] = useState(marker);
   const [error, setError] = useState(null);
   const [myaccuracy, setMyaccuracy] = useState(null);  
@@ -80,29 +77,29 @@ const MapComponent =({ onMarkerUpdate }) => {
           center={mylatlon}
           zoom={18}
           mapContainerStyle={containerStyle}
-          options={options}
-        >
+          options={options}>
+        
           {marker && (
             <BlueCircleMarker marker={marker} 
             accuracy={myaccuracy} 
             onClickedChange={handleMarkerClick} 
              />
-          )}
-          {otherMarker &&(
-            <Others marker={otherMarker} />
+          )} 
+          {otherData &&(
+            <ArrayMap otherData = {otherData} />
           )}
 
           {clicked &&(
-        <SongComponent
-        marker={marker}
-         >
+           <SongComponent
+           song={song}
+            marker={marker}
+            userName={userName}
+           >    
         </SongComponent>
           )};
 
           
-        <SongComponent
-        marker={otherMarker}>
-        </SongComponent>
+
 
         </GoogleMap>
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import TrackInfo from "./SongInfoFromID";
 
 async function fetchCurrentlyPlaying() {
   try {
@@ -55,14 +56,18 @@ const SpotifyNowPlaying = (props) => {
         }
 
         props.setStatus(response?.status);
+
+
       });
     }, 5000);
 
     return () => clearInterval(intervalId);
   }, [props]);
 
-  return null;
+
+  
 };
+
 
 export default SpotifyNowPlaying;
 

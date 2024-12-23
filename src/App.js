@@ -6,51 +6,34 @@ import Loginbotton from './LoginButton.js';
 import LogoutButton from './LogoutButton.js';
 import LogoutHandler from './handleLogout.js';
 import SpotifyProfile from './getProfile.js';
-import UserInfoFetcher from './Get.js';
-import GetUrl from './GetUrl'; // GetUrl をインポート
+import FetchAllUserData from './Get.js'; // FetchAllUserDataをインポート
+import GetUrl from './GetUrl';
+import TrackInfo from './SongInfoFromID.js';
 
 const App = () => {
-  // ログイン状態をlocalStorageから取得
+  const [userData, setUserData] = useState([]); // ユーザーデータを保存する状態
+  const [url, setUrl] = useState(""); // URLを保存する状態
   const [isLogin, setIsLogin] = useState(() => {
     const savedLoginState = localStorage.getItem("isLogin");
-    return savedLoginState === "true"; // "true"として保存されていればログイン状態
+    return savedLoginState === "true"; // ログイン状態の復元
   });
+  const [sessionOut, setSessionOut] = useState(null); // セッションの状態を管理
+  const [marker, setMarker] = useState({ lat: 33.658584, lng: 139.745433 }); // 現在地のマーカー
 
-  const [status, setStatus] = useState(null);
-  const [song, setSong] = useState(null);
-  const [sessionOut, setSessionOut] = useState(null);
-  const [marker, setMarker] = useState({
-    lat: 35.658584,
-    lng: 139.745433,
-  });
-  const [trackId, setTrackId] = useState(null);
-  const [userName, setUserName] = useState(""); // userName の状態を追加
 
+  const [song,setSong]=useState(null)
   const handleLogout = LogoutHandler({ setIsLogin });
+  const handleSessionOut = (newSessionStatus) => setSessionOut(newSessionStatus);
+  const [trackID,setTrackID] = useState(null)
 
-  const handleSessionOut = (newSessionStatus) => {
-    setSessionOut(newSessionStatus);
-  };
-
-  const handleTrackIdUpdate = (newTrackId) => {
-    setTrackId(newTrackId);
-    console.log("Received Track ID in App:", newTrackId);
-  };
-
-  const handleMarkerUpdate = (newMarker) => {
-    setMarker(newMarker);
-    console.log("Updated marker in App:", newMarker);
-  };
-
+  // userNameの取得
+  const [userName, setUserName] = useState(""); // userName の状態を追加
   useEffect(() => {
-    // ログインした際に Spotify のユーザー名を取得するロジックを追加
     const fetchUserName = async () => {
       const tempToken = localStorage.getItem("spotify_token_temp");
       if (tempToken) {
         const response = await fetch("https://api.spotify.com/v1/me", {
-          headers: {
-            Authorization: `Bearer ${tempToken}`,
-          },
+          headers: { Authorization: `Bearer ${tempToken}` },
         });
         if (response.ok) {
           const data = await response.json();
@@ -63,12 +46,7 @@ const App = () => {
       fetchUserName();
     }
   }, [isLogin]);
-
-  useEffect(() => {
-    // ログイン状態が変更されたとき、localStorageに状態を保存
-    localStorage.setItem("isLogin", isLogin ? "true" : "false");
-  }, [isLogin]);
-
+  
   return (
     <div>
       {!isLogin ? (
@@ -76,23 +54,32 @@ const App = () => {
       ) : (
         <>
           {sessionOut === 401 ? (
-            <p>Spotifyトークンの有効期限が切れました</p>
+            <div>Spotifyトークンの有効期限が切れました。再ログインしてください。</div>
           ) : (
             <SpotifyProfile />
           )}
           <LogoutButton onLogout={handleLogout} />
           <SpotifyNowPlaying
-            onSongUpdate={setSong} // 曲情報を更新
-            setStatus={(status) => handleSessionOut(status)}
-            onTrackIdUpdate={handleTrackIdUpdate}
+           onSongUpdate={setSong} // 曲情報を更新 // 曲情報の更新
+            setStatus={handleSessionOut}
+            onTrackIdUpdate={setTrackID}
           />
-          <MapComponent onMarkerUpdate={handleMarkerUpdate} />
-          <UserInfoFetcher />
-          <GetUrl 
-            marker={marker} 
-            trackId={trackId} 
-            userName={userName} // userName を GetUrl に渡す
+          <MapComponent
+            onMarkerUpdate={setMarker} // 現在地のマーカー更新
+            userName={userName} 
+            otherData={userData}
+            song={song}
           />
+          <GetUrl
+            marker={marker}
+            userName={userName}
+            trackId="trackId" // 適切なtrackIdを渡す
+            setUrl={setUrl} // URLをセット
+          />
+
+          <TrackInfo trackID={trackID}/>
+          
+          {url && <FetchAllUserData url={url} setUserData={setUserData} />} {/* 取得したデータを保存 */}
         </>
       )}
     </div>

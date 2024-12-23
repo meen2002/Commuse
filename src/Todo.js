@@ -5,7 +5,7 @@ import {
 import { useState} from "react";
 
 
-const BlueCircleMarker = ({ marker, accuracy, onClickedChange, }) => {
+const BlueCircleMarker = ({ marker , accuracy, onClickedChange, }) => {
   const [clicked,setClicked] = useState(false)
 
   const showinfo = () => {
@@ -18,8 +18,7 @@ const BlueCircleMarker = ({ marker, accuracy, onClickedChange, }) => {
   };
 
     return (<>
-    <MarkerF position={marker} 
-
+    <MarkerF position={marker}
     icon={{
             path: window.google.maps.SymbolPath.CIRCLE,
             scale: 10, // 円の大きさ

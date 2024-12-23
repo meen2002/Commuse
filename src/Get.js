@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const FetchAllUserData = ({ url }) => {
+const FetchAllUserData = ({ url, setUserData  }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -10,6 +10,7 @@ const FetchAllUserData = ({ url }) => {
       try {
         const response = await axios.get(url); // プロップで渡されたURLを使用
         setData(response.data); // データをステートに保存
+        setUserData(response.data);
         console.log("取得したデータ:", response.data);
       } catch (err) {
         setError(err.message || "データの取得に失敗しました");
@@ -20,7 +21,7 @@ const FetchAllUserData = ({ url }) => {
     if (url) {
       fetchData();
     }
-  }, [url]);
+  }, [url, setUserData ]);
 
   if (error) {
     return <div>Error: {error}</div>;

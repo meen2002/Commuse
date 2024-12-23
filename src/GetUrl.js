@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import FetchAllUserData from "./Get"; // 修正済みFetchAllUserDataをインポート
 
-const GetUrl = ({ marker, trackId, userName }) => {
-  const [url, setUrl] = useState("");
+const GetUrl = ({ marker, trackId, userName, setUrl}) => {
+ 
 
   useEffect(() => {
     const generateUrl = async () => {
@@ -30,11 +30,7 @@ const GetUrl = ({ marker, trackId, userName }) => {
     generateUrl();
   }, [marker, trackId, userName]); // userName が変更された時に URLを再生成
 
-  return (
-    <>
-      {url && <FetchAllUserData url={url} />} {/* URLをプロップとして渡す */}
-    </>
-  );
+  return (   null  );
 };
 
 export default GetUrl;
