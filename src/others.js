@@ -34,15 +34,15 @@ const Others = ({userName,latitude,longitude,trackID}) => {
             artists: track.artists[0].name,
             albumCover: albumCoverUrl,
           });
-          setMarkerColor("pink")
+          setMarkerColor("#FFCCCC")
         } 
         else if(response.status ===204){
           setTrackData(null)
-          setMarkerColor("grey")
+          setMarkerColor("#CCCCCC")
         }
       } catch (err) {
         setTrackData(null)
-        setMarkerColor("grey")
+        setMarkerColor("#CCCCCC")
       }
     };
 
