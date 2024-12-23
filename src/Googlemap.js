@@ -9,7 +9,7 @@ import ArrayMap from "./ArrayMap.js";
 
 
 
-const MapComponent =({userName , onMarkerUpdate ,otherData ,song}) => {
+const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId}) => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
   
 
@@ -101,6 +101,7 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song}) => {
             <ArrayMap 
             otherData={otherData}
             myName={userName}
+            myId={myId}
             />
           )}
 

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const SpotifyProfile = () => {
+const SpotifyProfile = ({myId}) => {
   const [userInfo, setUserInfo] = useState(null);
   const [error, setError] = useState(null);
+  const tempToken = localStorage.getItem(`spotifyToken_${myId}`);
+  console.log(myId)
 
   useEffect(() => {
-    const tempToken = localStorage.getItem("spotify_token_temp");
+    
 
     if (!tempToken) {
       setError("トークンが見つかりません。ログインしてください。");

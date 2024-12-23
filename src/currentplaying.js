@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import TrackInfo from "./SongInfoFromID";
 
-async function fetchCurrentlyPlaying() {
+async function fetchCurrentlyPlaying(myId) {
   try {
-    const tempToken = localStorage.getItem("spotify_token_temp");
+    const tempToken = localStorage.getItem(`spotifyToken_${myId}`);
     if (!tempToken) {
       console.error("トークンがありません。ログインしてください。");
       return null;
@@ -35,7 +35,7 @@ async function fetchCurrentlyPlaying() {
 const SpotifyNowPlaying = (props) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
-      fetchCurrentlyPlaying().then((response) => {
+      fetchCurrentlyPlaying(props.myId).then((response) => {
         if (response?.status === 200 && response.data?.item) {
           props.onSongUpdate({
             name: response.data.item.name,

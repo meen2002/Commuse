@@ -3,13 +3,13 @@ import { useState,useEffect} from "react";
 import axios from 'axios';
 import SongComponent from "./contents";
 
-const Others = ({userName,latitude,longitude,trackID}) => {
+const Others = ({userName,latitude,longitude,trackID,myId}) => {
 
   const [trackData, setTrackData] = useState(null);
   const [markerColor,setMarkerColor] = useState("grey")
 
   useEffect(() => {
-    const tempToken = localStorage.getItem("spotify_token_temp");
+    const tempToken = localStorage.getItem(`spotifyToken_${myId}`);
 
     if (!tempToken) {
       return (null)

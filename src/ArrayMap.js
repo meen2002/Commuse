@@ -4,7 +4,7 @@ import Others from "./others.js";
 import SongComponent from "./contents.js";
 
 
-const ArrayMap = ({ otherData,myName }) => {
+const ArrayMap = ({ otherData,myName,myId }) => {
     const allUsers=otherData.body;
     
     const [userData,setUserData]=useState(null);
@@ -30,6 +30,7 @@ const ArrayMap = ({ otherData,myName }) => {
         return (
           <div key={userData.user_name}>
             <Others
+            myId={myId}
             userName={userData.user_name}
             latitude={userData.latitude}
             longitude={userData.longitude}
