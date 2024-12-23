@@ -22,7 +22,7 @@ const Others = ({userName,latitude,longitude,trackID}) => {
             Authorization: `Bearer ${tempToken}`,
           },
         });
-        console.log(response.status);
+
 
         if (response.status === 200) {
           const track = response.data;
@@ -50,6 +50,8 @@ const Others = ({userName,latitude,longitude,trackID}) => {
       fetchTrackData();
     }
   }, [trackID]);
+
+  
 
 
   const [clicked,setClicked] = useState(false)

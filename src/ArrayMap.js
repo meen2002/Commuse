@@ -33,7 +33,8 @@ const ArrayMap = ({ otherData,myName }) => {
             userName={userData.user_name}
             latitude={userData.latitude}
             longitude={userData.longitude}
-            trackID={"6dOtVTDdiauQNBQEDOtlAB?si"}//サンプルID,6dOtVTDdiauQNBQEDOtlAB?si
+            // trackID={"6dOtVTDdiauQNBQEDOtlAB?si"}//サンプルID
+            trackID={userData.music_id}
             />
           </div>
         );
