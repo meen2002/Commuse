@@ -25,11 +25,11 @@ const App = () => {
 
   // 初期状態でlocalStorageからログイン状態を復元
 
-    const spotifyToken = localStorage.getItem(`spotifyToken_${myId}`); // Spotifyのトークンをチェック
+    
 
 
   const handleLogin = () => {
-    localStorage.setItem('isLogin_${myId}', "true"); // ログイン状態を保存
+    // localStorage.setItem(`isLogin_${myId}`, "true"); // ログイン状態を保存
     setIsLogin(true); // ログイン状態をセット
   };
 

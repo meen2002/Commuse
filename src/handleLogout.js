@@ -38,7 +38,7 @@ const LogoutHandler = ({ setIsLogin, myId }) => {
     localStorage.removeItem(`spotifyToken_${myId}`); // 追加された部分
 
     // ログイン状態を解除
-    localStorage.removeItem('isLogin_${myId}');
+    // localStorage.removeItem(`isLogin_${myId}`);
 
     // ページをリロードしてログイン画面に戻る
     window.location.reload();
