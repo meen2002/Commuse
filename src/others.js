@@ -1,7 +1,7 @@
 import { MarkerF } from "@react-google-maps/api";
 import { useState} from "react";
 
-const Others = ({ otherMarker, accuracy, onClickedChange,  }) => {
+const Others = ({ latitude,longitude, onClickedChange,  }) => {
 
   const [clicked,setClicked] = useState(false)
 
@@ -19,8 +19,11 @@ const Others = ({ otherMarker, accuracy, onClickedChange,  }) => {
 
   
           <MarkerF
-            // key={index} 
-            position={ null}  // otherMarkerオブジェクトを渡す
+            position={{
+              lat: latitude,
+              lng: longitude
+            }
+            }  // otherMarkerオブジェクトを渡す
             icon={{
               path: window.google.maps.SymbolPath.CIRCLE,
               scale: 10,

@@ -10,6 +10,7 @@ import FetchAllUserData from './Get.js'; // FetchAllUserDataをインポート
 import GetUrl from './GetUrl';
 import TrackInfo from './SongInfoFromID.js';
 
+
 const App = () => {
   const [userData, setUserData] = useState([]); // ユーザーデータを保存する状態
   const [url, setUrl] = useState(""); // URLを保存する状態
@@ -67,8 +68,8 @@ const App = () => {
           <MapComponent
             onMarkerUpdate={setMarker} // 現在地のマーカー更新
             userName={userName} 
-            otherData={userData}
             song={song}
+            otherData={userData}
           />
           <GetUrl
             marker={marker}
@@ -79,6 +80,7 @@ const App = () => {
 
           <TrackInfo trackID={trackID}/>
           
+
           {url && <FetchAllUserData url={url} setUserData={setUserData} />} {/* 取得したデータを保存 */}
         </>
       )}
