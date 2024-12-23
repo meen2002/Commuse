@@ -37,12 +37,8 @@ const SpotifyNowPlaying = (props) => {
     const intervalId = setInterval(() => {
       fetchCurrentlyPlaying().then((response) => {
         if (response?.status === 200 && response.data?.item) {
-          const trackID = response.data.item.id; // Track ID を取得
-          console.log("Current Track ID:", trackID);
 
-          if (props.onTrackIdUpdate) {
-            props.onTrackIdUpdate(trackID); // 親コンポーネントに Track ID を渡す
-          }
+
 
           props.onSongUpdate({
             name: response.data.item.name,

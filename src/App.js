@@ -8,7 +8,7 @@ import LogoutHandler from './handleLogout.js';
 import SpotifyProfile from './getProfile.js';
 import FetchAllUserData from './Get.js'; // FetchAllUserDataをインポート
 import GetUrl from './GetUrl';
-import TrackInfo from './SongInfoFromID.js';
+
 
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
   const [song,setSong]=useState(null)
   const handleLogout = LogoutHandler({ setIsLogin });
   const handleSessionOut = (newSessionStatus) => setSessionOut(newSessionStatus);
-  const [trackID,setTrackID] = useState(null)
+
 
   // userNameの取得
   const [userName, setUserName] = useState(""); // userName の状態を追加
@@ -63,7 +63,6 @@ const App = () => {
           <SpotifyNowPlaying
            onSongUpdate={setSong} // 曲情報を更新 // 曲情報の更新
             setStatus={handleSessionOut}
-            onTrackIdUpdate={setTrackID}
           />
           <MapComponent
             onMarkerUpdate={setMarker} // 現在地のマーカー更新
@@ -77,9 +76,6 @@ const App = () => {
             trackId="trackId" // 適切なtrackIdを渡す
             setUrl={setUrl} // URLをセット
           />
-
-          <TrackInfo trackID={trackID}/>
-          
 
           {url && <FetchAllUserData url={url} setUserData={setUserData} />} {/* 取得したデータを保存 */}
         </>

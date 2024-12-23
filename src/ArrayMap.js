@@ -19,37 +19,30 @@ const ArrayMap = ({ otherData,myName }) => {
 
       console.log("Users data:", userData); // Body内のデータをコンソールに出力
 
-    const [clicked, setClicked] = useState(false); // clicked 状態を管理
-    // 子コンポーネントから clicked の値を受け取る関数
-    const handleMarkerClick = (newClickedState) => {
-      setClicked(newClickedState); // clicked の値を更新
-      console.log(clicked)
-    };
+
     
       return (
         <div>
       {userData && userData.map((userData, index) => {
         // console.log("User data at index", index, ":", userData); // ユーザーごとにコンソールに出力
 
+        
         return (
           <div key={index}>
+            
 
 
             <Others
+            userName={userData.user_name}
             latitude={userData.latitude}
             longitude={userData.longitude}
-            onClickedChange={handleMarkerClick} 
+            trackID={"5PJH1U5Iie893v48Fl9yaC?si"}
             />
 
-           {/* {clicked &&(
-           <SongComponent
-            song={}
-            marker={marker}
-            userName={userName}
-           />    
-        )}; */}
 
 
+
+        
 
             {/* ユーザー情報を表示
             <h3>{user.user_name}</h3>

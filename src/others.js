@@ -1,23 +1,55 @@
 import { MarkerF } from "@react-google-maps/api";
-import { useState} from "react";
+import { useState,useEffect} from "react";
+import axios from 'axios';
+import SongComponent from "./contents";
 
-const Others = ({ latitude,longitude, onClickedChange,  }) => {
+const Others = ({userName,latitude,longitude,trackID}) => {
+
+  const [trackData, setTrackData] = useState(null);
+
+  useEffect(() => {
+    const tempToken = localStorage.getItem("spotify_token_temp");
+
+    if (!tempToken) {
+      return (null)
+    }
+
+    const fetchTrackData = async () => {
+      try {
+        const response = await axios.get(`https://api.spotify.com/v1/tracks/${trackID}`, {
+          headers: {
+            Authorization: `Bearer ${tempToken}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setTrackData(response.data);
+        } 
+      } catch (err) {
+      }
+    };
+
+    if (trackID) {
+      fetchTrackData();
+    }
+  }, [trackID]);
+
+
+
+
 
   const [clicked,setClicked] = useState(false)
 
   const showinfo = () => {
     const newClickedState = !clicked;
     setClicked(newClickedState); 
-    if (onClickedChange) {
-      onClickedChange(newClickedState); 
-    }
     console.log(clicked);
   };
 
+
+
   return (
     <>
-
-  
           <MarkerF
             position={{
               lat: latitude,
@@ -32,7 +64,21 @@ const Others = ({ latitude,longitude, onClickedChange,  }) => {
               strokeWeight: 2,
               strokeColor: "white",
             }}
+            onClick={showinfo}
           />
+
+          {clicked &&(
+           <SongComponent
+           song={trackData}
+            marker={{
+              lat: latitude,
+              lng: longitude
+            }}
+            userName={userName}
+           />    
+        )};
+
+
       
       
     </>
