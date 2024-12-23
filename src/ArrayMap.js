@@ -3,10 +3,12 @@ import { GoogleMap } from "@react-google-maps/api";
 import Others from "./others.js";
 import SongComponent from "./contents.js";
 
+
 const ArrayMap = ({ otherData,myName }) => {
     const allUsers=otherData.body;
     
     const [userData,setUserData]=useState(null);
+    console.log("allUsersData",allUsers);
 
     useEffect(() => {
         if (allUsers) {
@@ -15,41 +17,24 @@ const ArrayMap = ({ otherData,myName }) => {
           );
           setUserData(filteredUsers); // 状態を更新して自分の情報を削除
         }
-      }, [otherData, myName]);
+      }, [allUsers, myName]);
 
-      console.log("Users data:", userData); // Body内のデータをコンソールに出力
+    //   console.log("Users data:", userData); // Body内のデータをコンソールに出力
 
 
     
       return (
         <div>
-      {userData && userData.map((userData, index) => {
+      {userData && userData.map((userData) => {
         // console.log("User data at index", index, ":", userData); // ユーザーごとにコンソールに出力
-
-        
         return (
-          <div key={index}>
-            
-
-
+          <div key={userData.user_name}>
             <Others
             userName={userData.user_name}
             latitude={userData.latitude}
             longitude={userData.longitude}
-            trackID={"5PJH1U5Iie893v48Fl9yaC?si"}
+            trackID={"6dOtVTDdiauQNBQEDOtlAB?si"}//サンプルID,6dOtVTDdiauQNBQEDOtlAB?si
             />
-
-
-
-
-        
-
-            {/* ユーザー情報を表示
-            <h3>{user.user_name}</h3>
-            <p>Timestamp: {user.timestamp}</p>
-            <p>Latitude: {user.latitude}</p>
-            <p>Longitude: {user.longitude}</p>
-            <p>Music ID: {user.music_id}</p> */}
           </div>
         );
       })}

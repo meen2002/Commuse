@@ -37,9 +37,6 @@ const SpotifyNowPlaying = (props) => {
     const intervalId = setInterval(() => {
       fetchCurrentlyPlaying().then((response) => {
         if (response?.status === 200 && response.data?.item) {
-
-
-
           props.onSongUpdate({
             name: response.data.item.name,
             artists: response.data.item.artists
@@ -47,8 +44,12 @@ const SpotifyNowPlaying = (props) => {
               .join(", "),
             albumCover: response.data.item.album.images[0].url,
           });
+          props.onTrackIdUpdate(response.data.item.id);
+
+
         } else {
           props.onSongUpdate(null);
+          props.onTrackIdUpdate(null);
         }
 
         props.setStatus(response?.status);

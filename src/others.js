@@ -6,6 +6,7 @@ import SongComponent from "./contents";
 const Others = ({userName,latitude,longitude,trackID}) => {
 
   const [trackData, setTrackData] = useState(null);
+  const [markerColor,setMarkerColor] = useState("grey")
 
   useEffect(() => {
     const tempToken = localStorage.getItem("spotify_token_temp");
@@ -21,11 +22,27 @@ const Others = ({userName,latitude,longitude,trackID}) => {
             Authorization: `Bearer ${tempToken}`,
           },
         });
+        console.log(response.status);
 
         if (response.status === 200) {
-          setTrackData(response.data);
+          const track = response.data;
+          // アルバムカバーのURLを取得（最も解像度の高い画像）
+          const albumCoverUrl = track.album.images.length > 0 ? track.album.images[0].url : null;
+          // trackDataにアルバムカバーURLを含める
+          setTrackData({
+            name: track.name,
+            artists: track.artists[0].name,
+            albumCover: albumCoverUrl,
+          });
+          setMarkerColor("pink")
         } 
+        else if(response.status ===204){
+          setTrackData(null)
+          setMarkerColor("grey")
+        }
       } catch (err) {
+        setTrackData(null)
+        setMarkerColor("grey")
       }
     };
 
@@ -33,9 +50,6 @@ const Others = ({userName,latitude,longitude,trackID}) => {
       fetchTrackData();
     }
   }, [trackID]);
-
-
-
 
 
   const [clicked,setClicked] = useState(false)
@@ -59,7 +73,7 @@ const Others = ({userName,latitude,longitude,trackID}) => {
             icon={{
               path: window.google.maps.SymbolPath.CIRCLE,
               scale: 10,
-              fillColor: "yellow",
+              fillColor: markerColor,
               fillOpacity: 1.0,
               strokeWeight: 2,
               strokeColor: "white",
