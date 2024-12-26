@@ -19,8 +19,8 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId}) => {
     console.log(clicked)
   };
   const [marker,setMarker]=useState({
-    lat:35.658584,
-    lng:139.745433,
+    lat:0,
+    lng:0,
   })
 
   const [mylatlon, setMylatlon] = useState(marker);
@@ -79,7 +79,8 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId}) => {
           center={mylatlon}
           zoom={18}
           mapContainerStyle={containerStyle}
-          options={options}>
+          options={options}
+          className="map-container">
         
           {marker && (
             <BlueCircleMarker marker={marker} 

@@ -5,6 +5,7 @@ import CustomOverlayView from "./window.js";
 const SongComponent = ( {song , userName , marker}) => {
 
   console.log(song)
+  console.log(userName,"da")
 
   return (
     <>

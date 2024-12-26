@@ -25,11 +25,17 @@ const SpotifyProfile = ({myId}) => {
 
         if (response.status === 200) {
           setUserInfo(response.data);
+     
+
         } else {
           setError("Spotifyの認証に失敗しました。再ログインしてください。");
+       
+
         }
       } catch (err) {
         setError("再ログインしてください。");
+
+
       }
     };
 

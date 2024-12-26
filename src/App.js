@@ -8,6 +8,7 @@ import LogoutHandler from './handleLogout.js';
 import SpotifyProfile from './getProfile.js';
 import FetchAllUserData from './Get.js'; // FetchAllUserDataをインポート
 import GetUrl from './GetUrl';
+import LoggedInScreen from './LoggedInScreen.js';
 
 const App = () => {
 
@@ -46,6 +47,7 @@ const App = () => {
   };
 
   const [userName, setUserName] = useState(""); // userName の状態を追加
+  const [userImage, setUserImage] = useState(""); // 
   
   useEffect(() => {
     const fetchUserName = async () => {
@@ -57,6 +59,7 @@ const App = () => {
         if (response.ok) {
           const data = await response.json();
           setUserName(data.display_name); // ユーザー名を設定
+          setUserImage(data.images[0].url)
         }
       }
     };
@@ -76,9 +79,8 @@ const App = () => {
           {sessionOut === 401 ? (
             <div>Spotifyトークンの有効期限が切れました。再ログインしてください。</div>
           ) : (
-            <SpotifyProfile myId={myId}/>
+            <LoggedInScreen userName={userName} userImage={userImage} handleLogout={handleLogout} />
           )}
-          <LogoutButton onLogout={handleLogout} />
           <SpotifyNowPlaying
             myId={myId}
             onSongUpdate={setSong} // 曲情報を更新
