@@ -76,11 +76,9 @@ const App = () => {
         <Loginbotton isLogin={isLogin} setIsLogin={setIsLogin} onLogin={handleLogin} onUserId={handleUserId}/>
       ) : (
         <>
-          {sessionOut === 401 ? (
-            <div>Spotifyトークンの有効期限が切れました。再ログインしてください。</div>
-          ) : (
-            <LoggedInScreen userName={userName} userImage={userImage} handleLogout={handleLogout} />
-          )}
+
+          <LoggedInScreen userName={userName} userImage={userImage} handleLogout={handleLogout} status={sessionOut}/>
+  
           <SpotifyNowPlaying
             myId={myId}
             onSongUpdate={setSong} // 曲情報を更新

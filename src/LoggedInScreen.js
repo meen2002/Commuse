@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const LoggedInScreen = ({ userName, handleLogout, userImage }) => {
-  const [showMenu, setShowMenu] = useState(false);  // メニュー表示制御
+const LoggedInScreen = ({ userName, handleLogout, userImage, status}) => {
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleSpotifyLink = () => {
     window.open("https://www.spotify.com", "_blank");  // Spotifyのトップページを新しいタブで開く
   };
+
+  useEffect(() => {
+    // statusが200か204以外の場合にアラートを表示
+    if (status == 401 ) {
+      alert("セッションの有効期限が切れました。再ログインしてください。");
+      handleLogout(); // alert後にログアウト処理を実行
+    }
+  }, [status, handleLogout]);
 
   return (
     <div className="logged-in-container">
@@ -22,11 +30,12 @@ const LoggedInScreen = ({ userName, handleLogout, userImage }) => {
         </div>
         {showMenu && (
           <div className="dropdown-menu">
-            <button className="menu-item logout-button" onClick={handleLogout}>ログアウト</button>
             <button className="menu-item spotify-link" onClick={handleSpotifyLink}>Spotify</button>
+            <button className="menu-item logout-button" onClick={handleLogout}>ログアウト</button>
           </div>
         )}
       </div>
+
     </div>
   );
 };
