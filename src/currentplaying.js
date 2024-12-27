@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import TrackInfo from "./SongInfoFromID";
 
 async function fetchCurrentlyPlaying(myId) {
   try {
@@ -43,6 +42,7 @@ const SpotifyNowPlaying = (props) => {
               .map((artist) => artist.name)
               .join(", "),
             albumCover: response.data.item.album.images[0].url,
+            TrackId: response.data.item.id
           });
           props.onTrackIdUpdate(response.data.item.id);
 

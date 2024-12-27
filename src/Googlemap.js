@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScriptNext} from "@react-google-maps/api";
 import BlueCircleMarker from "./Todo.js"; // マーカーをインポート
-import Others from "./others.js";
 import SongComponent from "./contents.js";
 import ArrayMap from "./ArrayMap.js";
 
@@ -9,7 +8,7 @@ import ArrayMap from "./ArrayMap.js";
 
 
 
-const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId}) => {
+const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId, userImage, status}) => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
   
 
@@ -82,10 +81,20 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId}) => {
           options={options}
           className="map-container">
         
-          {marker && (
+
+          {otherData &&(
+            <ArrayMap 
+            otherData={otherData}
+            myName={userName}
+            myId={myId}
+            />
+          )}
+
+{marker && (
             <BlueCircleMarker marker={marker} 
-            accuracy={myaccuracy} 
             onClickedChange={handleMarkerClick} 
+            userImage={userImage}
+            status={status}
              />
           )} 
 
@@ -98,13 +107,6 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId}) => {
            />    
         )};
 
-          {otherData &&(
-            <ArrayMap 
-            otherData={otherData}
-            myName={userName}
-            myId={myId}
-            />
-          )}
 
           
 

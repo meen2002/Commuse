@@ -92,12 +92,15 @@ const App = () => {
             song={song}
             otherData={userData}
             myId={myId}
+            userImage={userImage}
+            status={sessionOut}
           />
           <GetUrl
             marker={marker}
             userName={userName}
             trackId={trackId}
             setUrl={setUrl}
+            userImage={userImage}
           />
 
           {url && <FetchAllUserData url={url} setUserData={setUserData} />} {/* 取得したデータを保存 */}

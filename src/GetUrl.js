@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FetchAllUserData from "./Get"; // 修正済みFetchAllUserDataをインポート
 
-const GetUrl = ({ marker, trackId, userName, setUrl}) => {
+const GetUrl = ({ marker, trackId, userName, setUrl,userImage}) => {
  
 
   useEffect(() => {
@@ -17,6 +17,7 @@ const GetUrl = ({ marker, trackId, userName, setUrl}) => {
         // 曲IDを設定
         const musicId = trackId || "unknown_track_id";
 
+        const Image = userImage || null;
         // URLの生成
         const baseUrl = "https://wb8xg4edgd.execute-api.ap-northeast-1.amazonaws.com/dev/insert_userdata";
         const fullUrl = `${baseUrl}?user_name=${encodeURIComponent(user)}&latitude=${latitude}&longitude=${longitude}&music_id=${encodeURIComponent(musicId)}`;

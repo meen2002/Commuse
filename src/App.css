@@ -120,7 +120,7 @@
   padding: 10px 0;
   width: 160px;
   z-index: 100;
-  transition: all 0.9s ease;  /* メニュー表示時にアニメーションを追加 */
+  transition: all 1.0s ease;  /* メニュー表示時にアニメーションを追加 */
 }
 
 /* メニュー項目 */
@@ -147,7 +147,7 @@
   color: #ff6b6b;  /* ログアウトボタンに温かみのある赤を設定 */
   font-weight: bold;
   border: none;  /* ボーダーなし */
-  padding: 8px 20px;  /* ボタンのサイズを調整 */
+  padding: 5px 20px;  /* ボタンのサイズを調整 */
   border-radius: 20px;  /* 丸いボタンにする */
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;  /* アニメーションを追加 */
@@ -155,7 +155,7 @@
 
 .logout-button:hover {
   background-color: rgba(255, 107, 107, 0.1);  /* ソフトなホバー効果 */
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 /* Spotifyリンク */
@@ -172,7 +172,7 @@
 
 .spotify-link:hover {
   background-color: rgba(29, 185, 84, 0.1);  /* ソフトなホバー効果 */
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 
@@ -197,6 +197,17 @@
 .song-container {
   display: flex;
   align-items: center;
+}
+
+.album-cover {
+  border-radius: 3px; 
+  transition: transform 0.3s ease, opacity 0.3s ease; /* 変化のアニメーションを追加 */
+  cursor: pointer; /* クリックできることを示すカーソル */
+}
+
+.album-cover:hover {
+  transform: scale(1.04); /* ホバー時に少し大きくする */
+  opacity: 0.7; /* 透明度を少し下げる */
 }
 
 .spotify-profile {
@@ -238,7 +249,6 @@
 }
 
 .song-title {
-
   font-size: 13px;
   font-weight: bold;
   color: #333;
@@ -297,7 +307,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px; /* 角を丸くしたい場合は追加 */
+  border-radius: 3px; /* 角を丸くしたい場合は追加 */
   height: 50px; /* 高さを指定 */
   width: 50px; /* 幅を指定 */
   background-color: #ccc; /* グレー色 */
@@ -308,3 +318,4 @@
   border-radius: 50%; /* 画像を丸型にする */
   object-fit: cover;
 }
+

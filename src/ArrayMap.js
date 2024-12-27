@@ -36,6 +36,7 @@ const ArrayMap = ({ otherData,myName,myId }) => {
             longitude={userData.longitude}
             // trackID={"6dOtVTDdiauQNBQEDOtlAB?si"}//サンプルID
             trackID={userData.music_id}
+            // userImage={userData.userImage}
             />
           </div>
         );
