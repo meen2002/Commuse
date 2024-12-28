@@ -102,7 +102,7 @@ const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) =
 
   return (
     <>
-    { userImage&& (
+    { newLatitude && (
          <OverlayView
          position={{
           lat:newLatitude,
