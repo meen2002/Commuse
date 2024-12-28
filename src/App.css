@@ -147,7 +147,7 @@
   color: #ff6b6b;  /* ログアウトボタンに温かみのある赤を設定 */
   font-weight: bold;
   border: none;  /* ボーダーなし */
-  padding: 5px 20px;  /* ボタンのサイズを調整 */
+  padding: 8px 20px;  /* ボタンのサイズを調整 */
   border-radius: 20px;  /* 丸いボタンにする */
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;  /* アニメーションを追加 */

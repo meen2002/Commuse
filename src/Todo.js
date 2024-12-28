@@ -33,7 +33,7 @@ const BlueCircleMarker = ({ marker , onClickedChange, userImage,status}) => {
 
     return (
     <>
-    { userImage && marker? (
+    { userImage? (
          <OverlayView
          position={marker}  // Markerの位置にオーバーレイを表示
          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET} // マウスターゲットにオーバーレイを表示
