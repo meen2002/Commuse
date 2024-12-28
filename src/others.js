@@ -95,14 +95,14 @@ const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) =
   const showinfo = () => {
     const newClickedState = !clicked;
     setClicked(newClickedState); 
-    console.log(clicked);
+    console.log(clicked,userName);
   };
 
 
 
   return (
     <>
-
+    { userImage&& (
          <OverlayView
          position={{
           lat:newLatitude,
@@ -172,6 +172,7 @@ const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) =
            />
          </div>
        </OverlayView>
+    )}
 
 
 
