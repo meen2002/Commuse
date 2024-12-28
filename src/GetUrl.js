@@ -20,7 +20,7 @@ const GetUrl = ({ marker, trackId, userName, setUrl,userImage}) => {
         const Image = userImage || null;
         // URLの生成
         const baseUrl = "https://wb8xg4edgd.execute-api.ap-northeast-1.amazonaws.com/dev/insert_userdata";
-        const fullUrl = `${baseUrl}?user_name=${encodeURIComponent(user)}&latitude=${latitude}&longitude=${longitude}&music_id=${encodeURIComponent(musicId)}`;
+        const fullUrl = `${baseUrl}?user_name=${encodeURIComponent(user)}&latitude=${latitude}&longitude=${longitude}&music_id=${encodeURIComponent(musicId)}&profile_ifmage=${Image}`;
         
         setUrl(fullUrl); // URLをステートに保存
       } catch (error) {

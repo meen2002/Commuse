@@ -3,7 +3,41 @@ import SongComponent from "./contents";
 import { useState,useRef,useEffect } from "react";
 import { OverlayView } from "@react-google-maps/api";
 
-const Others = ({userName,latitude,longitude,trackID,myId,userImage}) => {
+const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) => {
+
+  const latDifference = myMarker.lat - latitude;
+  const lngDifference = myMarker.lng - longitude;
+
+  const adjustmentFactor = 0.0002; // 微調整するためのファクター（調整量）
+
+  let newLatitude = latitude;
+  let newLongitude = longitude;
+
+  // 緯度が近い場合、方向に応じて調整
+  if (Math.abs(latDifference) < adjustmentFactor) {
+    // 差がプラス（myMarker.latがlatitudeより大きい場合）
+    if (latDifference > 0) {
+      newLatitude = latitude - adjustmentFactor; // latitudeを小さくする
+    }
+    // 差がマイナス（myMarker.latがlatitudeより小さい場合）
+    else {
+      newLatitude = latitude + adjustmentFactor; // latitudeを大きくする
+    }
+  }
+
+  // 経度が近い場合、方向に応じて調整
+  if (Math.abs(lngDifference) < adjustmentFactor) {
+    // 差がプラス（myMarker.lngがlongitudeより大きい場合）
+    if (lngDifference > 0) {
+      newLongitude = longitude - adjustmentFactor; // longitudeを小さくする
+    }
+    // 差がマイナス（myMarker.lngがlongitudeより小さい場合）
+    else {
+      newLongitude = longitude + adjustmentFactor; // longitudeを大きくする
+    }
+  }
+
+
 
   const [trackData, setTrackData] = useState(null);
   const [color,setColor]=useState("#888888")
@@ -65,18 +99,14 @@ const Others = ({userName,latitude,longitude,trackID,myId,userImage}) => {
   };
 
 
- 
-
-
-
 
   return (
     <>
 
          <OverlayView
          position={{
-          lat:latitude,
-          lng:longitude
+          lat:newLatitude,
+          lng:newLongitude
          }}  // Markerの位置にオーバーレイを表示
          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET} // マウスターゲットにオーバーレイを表示
        >

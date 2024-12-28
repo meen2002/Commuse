@@ -4,7 +4,7 @@ import Others from "./others.js";
 import SongComponent from "./contents.js";
 
 
-const ArrayMap = ({ otherData,myName,myId }) => {
+const ArrayMap = ({ otherData,myName,myId,myMarker }) => {
     const allUsers=otherData.body;
     
     const [userData,setUserData]=useState(null);
@@ -37,6 +37,7 @@ const ArrayMap = ({ otherData,myName,myId }) => {
             // trackID={"6dOtVTDdiauQNBQEDOtlAB?si"}//サンプルID
             trackID={userData.music_id}
             // userImage={userData.userImage}
+            myMarker={myMarker}
             />
           </div>
         );

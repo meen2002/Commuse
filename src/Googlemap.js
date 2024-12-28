@@ -11,6 +11,7 @@ import ArrayMap from "./ArrayMap.js";
 const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId, userImage, status}) => {
   const [clicked, setClicked] = useState(false); // clicked 状態を管理
   
+  
 
   // 子コンポーネントから clicked の値を受け取る関数
   const handleMarkerClick = (newClickedState) => {
@@ -18,7 +19,7 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId, userImag
     console.log(clicked)
   };
   const [marker,setMarker]=useState({
-    lat:0,
+    lat:33,
     lng:0,
   })
 
@@ -31,10 +32,10 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId, userImag
   };
 
   const options = {
-    mapTypeControl: true,
+    mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: false,
-    zoomControl: true,
+    zoomControl: false,
   };
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId, userImag
         },
         {
           enableHighAccuracy: true,
-          timeout: 1000,
+          timeout: 100,
           maximumAge: 0,
         }
       );
@@ -67,8 +68,9 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId, userImag
     } else {
       setError("このブラウザでは位置情報がサポートされていません。");
     }
+    console.log(marker)
     
-  }, [setMarker]);
+  }, []);
 
   return (
     <>
@@ -87,10 +89,11 @@ const MapComponent =({userName , onMarkerUpdate ,otherData ,song, myId, userImag
             otherData={otherData}
             myName={userName}
             myId={myId}
+            myMarker={marker}
             />
           )}
 
-{marker && (
+            {marker && (
             <BlueCircleMarker marker={marker} 
             onClickedChange={handleMarkerClick} 
             userImage={userImage}

@@ -99,8 +99,8 @@ const BlueCircleMarker = ({ marker , onClickedChange, userImage,status}) => {
          </div>
        </OverlayView>
 
-            ):(
-             null
+             ):(
+              null
 
             )
           }
