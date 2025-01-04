@@ -2,7 +2,7 @@
 export const authConfig = {
   endpoint: "https://accounts.spotify.com/authorize",
   clientId: "e631bbfc47864268998147bf7d9ee775",
-  redirectUri: process.env.REACT_APP_REDIRECT_URI || "http://localhost:3000/",
+  redirectUri: "http://localhost:3000"||"https://commuse.vercel.app" ,
   scopes: [
     "user-read-currently-playing",
     "user-read-playback-state",

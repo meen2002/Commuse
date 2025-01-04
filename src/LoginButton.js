@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTokenFromUrl, accessUrl } from "./getToken.js";
+import { getTokenFromUrl, accessUrl } from "./infrastructures/SpotifyAPI/getToken";
 
 function Loginbotton(props) {
   const [token, setToken] = useState(null);
@@ -56,3 +56,4 @@ function Loginbotton(props) {
 }
 
 export default Loginbotton;
+

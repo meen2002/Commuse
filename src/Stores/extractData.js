@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap } from "@react-google-maps/api";
-import Others from "./others.js";
-import SongComponent from "./contents.js";
+import Others from "../features/others.js";
+import SongComponent from "../features/contents.js";
 
 
 const ArrayMap = ({ otherData,myName,myId,myMarker }) => {
@@ -36,7 +36,7 @@ const ArrayMap = ({ otherData,myName,myId,myMarker }) => {
             longitude={userData.longitude}
             // trackID={"6dOtVTDdiauQNBQEDOtlAB?si"}//サンプルID
             trackID={userData.music_id}
-            // userImage={userData.userImage}
+            userImage={userData.profile_image}
             myMarker={myMarker}
             />
           </div>

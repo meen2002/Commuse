@@ -40,4 +40,3 @@ const FetchAllUserData = ({ url, setUserData  }) => {
 };
 
 export default FetchAllUserData;
-

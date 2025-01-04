@@ -1,13 +1,13 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import SpotifyNowPlaying from "./currentplaying.js";
+import SpotifyNowPlaying from './infrastructures/SpotifyAPI/currentplaying.js';
 import MapComponent from './Googlemap.js';
 import Loginbotton from './LoginButton.js';
-import LogoutButton from './LogoutButton.js';
+
 import LogoutHandler from './handleLogout.js';
-import SpotifyProfile from './getProfile.js';
-import FetchAllUserData from './Get.js'; // FetchAllUserDataをインポート
-import GetUrl from './GetUrl';
+
+import FetchAllUserData from './infrastructures/getOtherInfo/GetAllUserInfo.js';
+import GetUrl from './infrastructures/getOtherInfo/SetAPIUrl.js';
 import LoggedInScreen from './LoggedInScreen.js';
 
 const App = () => {
@@ -33,6 +33,7 @@ const App = () => {
     // localStorage.setItem(`isLogin_${myId}`, "true"); // ログイン状態を保存
     setIsLogin(true); // ログイン状態をセット
   };
+
 
   const handleLogout = LogoutHandler({ setIsLogin ,myId});
 
@@ -69,6 +70,7 @@ const App = () => {
     }
   }, [isLogin]);
   console.log(myId)
+
 
   return (
     <div>

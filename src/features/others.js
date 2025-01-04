@@ -1,7 +1,8 @@
 import axios from 'axios';
-import SongComponent from "./contents";
+import MarkerInfo from './contents';
 import { useState,useRef,useEffect } from "react";
 import { OverlayView } from "@react-google-maps/api";
+
 
 const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) => {
 
@@ -64,6 +65,7 @@ const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) =
           // アルバムカバーのURLを取得（最も解像度の高い画像）
           const albumCoverUrl = track.album.images.length > 0 ? track.album.images[0].url : null;
           // trackDataにアルバムカバーURLを含める
+         
           setTrackData({
             name: track.name,
             artists: track.artists[0].name,
@@ -85,7 +87,7 @@ const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) =
     if (trackID) {
       fetchTrackData();
     }
-  }, [trackID]);
+  }, [trackID,myId]);
 
   
 
@@ -177,11 +179,11 @@ const Others = ({userName,latitude,longitude,trackID,myId,userImage,myMarker}) =
 
 
           {clicked &&(
-           <SongComponent
+           <MarkerInfo
            song={trackData}
             marker={{
-              lat: latitude,
-              lng: longitude
+              lat: newLatitude,
+              lng: newLongitude
             }}
             userName={userName}
            />    

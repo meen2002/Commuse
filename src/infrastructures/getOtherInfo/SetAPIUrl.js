@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FetchAllUserData from "./Get"; // 修正済みFetchAllUserDataをインポート
+import FetchAllUserData from "./GetAllUserInfo";
 
 const GetUrl = ({ marker, trackId, userName, setUrl,userImage}) => {
  
