@@ -24,7 +24,7 @@ const App = () => {
   
   const [isLogin, setIsLogin] = useState(false);
 
-  // 初期状態でlocalStorageからログイン状態を復元
+
 
     
 
@@ -78,7 +78,7 @@ const App = () => {
         <Loginbotton isLogin={isLogin} setIsLogin={setIsLogin} onLogin={handleLogin} onUserId={handleUserId}/>
       ) : (
         <>
-
+        
           <LoggedInScreen userName={userName} userImage={userImage} handleLogout={handleLogout} status={sessionOut}/>
   
           <SpotifyNowPlaying
