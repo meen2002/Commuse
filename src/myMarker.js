@@ -12,7 +12,7 @@ const MyMarker = ({ marker , onClickedChange, status}) => {
   useEffect(() => {
     // statusが200の場合にcolorを明るい色に変更
     if (status === 200) {
-      setColor("#447520");  
+      setColor("blue");  
     } else {
       setColor("#B0B0B0");  // 他の状態では灰色に設定
     }
