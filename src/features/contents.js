@@ -35,7 +35,7 @@ const SongComponent = ( {song , userName , marker}) => {
                     }}
                   ></div>
                   <div>
-                    <h3>取得中だお</h3>
+                    <h3>No song is playing</h3>
                   </div>
                 </div>
               </div>

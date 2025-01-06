@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { getTokenFromUrl } from "./infrastructures/SpotifyAPI/getToken";
 
+
 function Login(props) {
   const [token, setToken] = useState(null);
   const hashToken = getTokenFromUrl().access_token;
