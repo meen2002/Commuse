@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { MyName,MyImage } from "./GetMyProf";
 
-const LoggedInScreen = ({ userName, handleLogout, userImage, status}) => {
+const LoggedInScreen = ({handleLogout, status}) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleSpotifyLink = () => {
@@ -22,11 +23,11 @@ const LoggedInScreen = ({ userName, handleLogout, userImage, status}) => {
         <div className="profile-section" onClick={() => setShowMenu(!showMenu)}>
           {/* プロフィール画像を円形で表示 */}
           <img
-            src={userImage || "https://via.placeholder.com/50"} // プロフィール画像のURL、デフォルトの画像も設定
+            src={MyImage || "https://via.placeholder.com/50"} // プロフィール画像のURL、デフォルトの画像も設定
             alt="Profile"
             className="profile-photo"
           />
-          <span className="username">{userName}</span>
+          <span className="username">{MyName}</span>
         </div>
         {showMenu && (
           <div className="dropdown-menu">

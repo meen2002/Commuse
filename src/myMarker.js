@@ -1,9 +1,10 @@
 import { useState,useRef,useEffect } from "react";
 import { OverlayView } from "@react-google-maps/api";
+import { MyImage } from "./GetMyProf";
 
 
 
-const MyMarker = ({ marker , onClickedChange, userImage,status}) => {
+const MyMarker = ({ marker , onClickedChange, status}) => {
   const [clicked,setClicked] = useState(false)
   const divRef = useRef(null);
   const [color,setColor]=useState("#999999")
@@ -18,9 +19,7 @@ const MyMarker = ({ marker , onClickedChange, userImage,status}) => {
   }, [status]);
 
 
-  if(userImage){
-    console.log(userImage)
-  }
+
 
   const showinfo = () => {
     const newClickedState = !clicked;
@@ -33,7 +32,7 @@ const MyMarker = ({ marker , onClickedChange, userImage,status}) => {
 
     return (
     <>
-    { userImage? (
+    { MyImage? (
          <OverlayView
          position={marker}  // Markerの位置にオーバーレイを表示
          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET} // マウスターゲットにオーバーレイを表示
@@ -66,7 +65,7 @@ const MyMarker = ({ marker , onClickedChange, userImage,status}) => {
            {/* ユーザー画像を丸く表示 */}
            <img
   onClick={showinfo}  // 画像をクリックしたときにhandleClickが実行される
-  src={userImage}  // userImageがない場合はサンプル画像を表示
+  src={MyImage}  // userImageがない場合はサンプル画像を表示
   alt="user"
   style={{
     width: "100%",  // 親要素にフィットさせる

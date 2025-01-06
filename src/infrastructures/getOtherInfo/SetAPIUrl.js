@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import FetchAllUserData from "./GetAllUserInfo";
+import { MyName,MyImage } from "../../GetMyProf";
 
-const GetUrl = ({ marker, trackId, userName, setUrl,userImage}) => {
+const GetUrl = ({ marker, trackId, setUrl}) => {
  
 
   useEffect(() => {
     const generateUrl = async () => {
       try {
         // userName を親コンポーネントから取得
-        const user = userName || "Unknown User"; // もし userName が undefined や null なら "Unknown User" を使う
+        const user = MyName || "Unknown User"; // もし userName が undefined や null なら "Unknown User" を使う
 
         // 緯度・経度を取得
         const latitude = marker.lat || 0;
@@ -17,7 +18,7 @@ const GetUrl = ({ marker, trackId, userName, setUrl,userImage}) => {
         // 曲IDを設定
         const musicId = trackId || "unknown_track_id";
 
-        const Image = userImage || null;
+        const Image = MyImage || null;
         // URLの生成
         const baseUrl = "https://wb8xg4edgd.execute-api.ap-northeast-1.amazonaws.com/dev/insert_userdata";
         const fullUrl = `${baseUrl}?user_name=${encodeURIComponent(user)}&latitude=${latitude}&longitude=${longitude}&music_id=${encodeURIComponent(musicId)}&profile_image=${Image}`;
@@ -29,9 +30,9 @@ const GetUrl = ({ marker, trackId, userName, setUrl,userImage}) => {
     };
 
     generateUrl();
-  }, [marker, trackId, userName]); // userName が変更された時に URLを再生成
+  }, [marker, trackId, ]); // userName が変更された時に URLを再生成
 
-  return (   null  );
+  return ( null );
 };
 
 export default GetUrl;

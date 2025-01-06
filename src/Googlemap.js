@@ -5,9 +5,9 @@ import SongComponent from "./features/contents.js";
 import ArrayMap from "./Stores/extractData.js";
 import { getCurrentLocation } from "./getCurrentLocation.js";
 import mapStyle from "./MapStyle.js";
+import { MyName, MyImage } from "./GetMyProf.js";
 
 const MapComponent = ({
-  userName,
   onMarkerUpdate,
   otherData,
   song,
@@ -51,7 +51,6 @@ const MapComponent = ({
           <MyMarker
             marker={marker}
             onClickedChange={handleMarkerClick}
-            userImage={userImage}
             status={status}
           />
         )}
@@ -59,13 +58,12 @@ const MapComponent = ({
         {otherData && (
           <ArrayMap
             otherData={otherData}
-            myName={userName}
             myId={myId}
             myMarker={marker}
           />
         )}
 
-        {clicked && <SongComponent song={song} marker={marker} userName={userName} />}
+        {clicked && <SongComponent song={song} marker={marker} userName={MyName} />}
       </GoogleMap>
     </LoadScriptNext>
   );
