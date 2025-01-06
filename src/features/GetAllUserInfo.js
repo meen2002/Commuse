@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const FetchAllUserData = ({ url, setUserData  }) => {
+const GetAllUserData = ({ url, setUserData  }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -39,4 +39,4 @@ const FetchAllUserData = ({ url, setUserData  }) => {
   );
 };
 
-export default FetchAllUserData;
+export default GetAllUserData;

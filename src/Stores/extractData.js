@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Others from "../features/others.js";
-import { MyName } from "../GetMyProf.js";
+import { MyName } from "../features/GetMyProf.js";
 
 
 const ArrayMap = ({ otherData,myId,myMarker }) => {

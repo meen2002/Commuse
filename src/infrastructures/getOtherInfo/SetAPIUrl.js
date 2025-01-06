@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import FetchAllUserData from "./GetAllUserInfo";
-import { MyName,MyImage } from "../../GetMyProf";
+
+import { MyName,MyImage } from "../../features/GetMyProf";
 
 const GetUrl = ({ marker, trackId, setUrl}) => {
  

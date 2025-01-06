@@ -1,14 +1,14 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import SpotifyNowPlaying from './infrastructures/SpotifyAPI/currentplaying.js';
-import MapComponent from './Googlemap.js';
-import Login from "./Login";
-import LoginButton from './LoginButton.js';
-import LogoutHandler from './handleLogout.js';
-import FetchAllUserData from './infrastructures/getOtherInfo/GetAllUserInfo.js';
+import SpotifyNowPlaying from './features/currentplaying.js';
+import MapComponent from './UI/Googlemap.js';
+import Login from './features/Login.js';
+import LoginButton from './UI/LoginButton.js';
+import LogoutHandler from './features/handleLogout.js';
+import GetAllUserInfo from './features/GetAllUserInfo.js';
 import GetUrl from './infrastructures/getOtherInfo/SetAPIUrl.js';
-import LoggedInScreen from './LoggedInScreen.js';
-import { fetchUserName } from './GetMyProf.js';
+import LoggedInScreen from './UI/LoggedInScreen.js';
+import { fetchUserName } from './features/GetMyProf.js';
 
 const App = () => {
   const [myId, setMyId] = useState(null);
@@ -19,8 +19,6 @@ const App = () => {
   const [marker, setMarker] = useState({ lat: 33.658584, lng: 139.745433 });
   const [song, setSong] = useState(null);
   const [trackId, setTrackId] = useState(null);
-  const [userName, setUserName] = useState("");
-  const [userImage, setUserImage] = useState("");
 
   const handleUserId = (newUserId) => {
     setMyId(newUserId);
@@ -41,7 +39,6 @@ const App = () => {
         await fetchUserName(myId);
       }
     };
-
     getUserName();
   }, [isLogin, myId]);
 
@@ -49,7 +46,7 @@ const App = () => {
     <div>
       {isLogin ? (
         <>
-          <LoggedInScreen userName={userName} userImage={userImage} handleLogout={handleLogout} status={sessionOut} />
+          <LoggedInScreen handleLogout={handleLogout} status={sessionOut} />
   
           <SpotifyNowPlaying
             myId={myId}
@@ -72,7 +69,7 @@ const App = () => {
             setUrl={setUrl}
           />
   
-          {url && <FetchAllUserData url={url} setUserData={setUserData} />}
+          {url && <GetAllUserInfo url={url} setUserData={setUserData} />}
         </>
       ) : (
         <>

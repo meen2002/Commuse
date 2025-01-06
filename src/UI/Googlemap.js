@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScriptNext } from "@react-google-maps/api";
 import MyMarker from "./myMarker.js";
-import SongComponent from "./features/contents.js";
-import ArrayMap from "./Stores/extractData.js";
-import { getCurrentLocation } from "./getCurrentLocation.js";
+import SongComponent from "../features/contents.js";
+import ArrayMap from "../Stores/extractData.js";
+import { getCurrentLocation } from "../features/getCurrentLocation.js";
 import mapStyle from "./MapStyle.js";
-import { MyName, MyImage } from "./GetMyProf.js";
+import { MyName } from "../features/GetMyProf.js";
+
 
 const MapComponent = ({
   onMarkerUpdate,

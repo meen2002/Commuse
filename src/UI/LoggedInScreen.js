@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MyName,MyImage } from "./GetMyProf";
+import { MyName,MyImage } from "../features/GetMyProf";
 
 const LoggedInScreen = ({handleLogout, status}) => {
   const [showMenu, setShowMenu] = useState(false);

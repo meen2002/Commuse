@@ -1,7 +1,6 @@
 // Login.js
 import React, { useEffect, useState } from "react";
-import { getTokenFromUrl } from "./infrastructures/SpotifyAPI/getToken";
-
+import { getTokenFromUrl } from "../infrastructures/getToken";
 
 function Login(props) {
   const [token, setToken] = useState(null);

@@ -1,6 +1,6 @@
 import { useState,useRef,useEffect } from "react";
 import { OverlayView } from "@react-google-maps/api";
-import { MyImage } from "./GetMyProf";
+import { MyImage } from "../features/GetMyProf";
 
 
 

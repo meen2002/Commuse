@@ -1,6 +1,6 @@
 // LoginButton.js
 import React from 'react';
-import { accessUrl } from "./infrastructures/SpotifyAPI/getToken";
+import { accessUrl } from '../infrastructures/getToken';
 
 function LoginButton() {
   return (
